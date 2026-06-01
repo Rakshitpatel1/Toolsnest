@@ -1,4 +1,4 @@
-const CACHE = 'toolsnest-v1';
+const CACHE = 'toolsnest-v2';
 
 const PAGES = [
   '/',
