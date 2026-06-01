@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Generator — Free Strong Secure Random Password | ToolsNest</title>
+  <meta name="description" content="Free online password generator. Generate strong, cryptographically secure random passwords with custom length and character options — uppercase, lowercase, numbers and symbols." />
+  <meta name="keywords" content="password generator, strong password generator, secure password generator, random password generator, password maker online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/password-generator/" />
+  <meta property="og:title" content="Free Password Generator — Strong Secure Random Passwords | ToolsNest" />
+  <meta property="og:description" content="Generate cryptographically secure passwords. Choose length, uppercase, lowercase, numbers and symbols. Free, no signup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/password-generator/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Password Generator","description":"Free online cryptographically secure password generator with custom length and character options.","url":"https://toolsnestindia.netlify.app/tools/password-generator/","applicationCategory":"SecurityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+  <nav>
+    <a class="logo" href="/"><div class="logo-icon"><i class="ti ti-tools"></i></div><span class="logo-text">Tools<span>Nest</span></span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/case-converter/">Case Converter</a>
+      <a href="/tools/word-counter/">Word Counter</a>
+      <a href="/tools/password-generator/" class="active">Password Gen</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/password-generator/">🔒 Password Generator</a>
+    <a href="/tools/case-converter/">Tt Case Converter</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+  </div>
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb"><a href="/">Home</a><i class="ti ti-chevron-right"></i><span>Password Generator</span></div>
+      <div class="panel-card">
+        <div class="panel-header"><h2>Password Generator</h2><p>Generate a cryptographically secure password with your preferred settings.</p></div>
+        <div class="pw-display" id="pw-output">Click Generate</div>
+        <div class="action-row" style="margin-top:12px;">
+          <button class="action-btn primary" onclick="generatePassword()"><i class="ti ti-refresh"></i> Generate</button>
+          <button class="action-btn" onclick="copyPassword()"><i class="ti ti-copy"></i> Copy</button>
+        </div>
+        <div style="margin-top:24px;display:flex;flex-direction:column;gap:16px;">
+          <div class="field-row">
+            <span class="field-label">Length</span>
+            <input type="range" min="6" max="64" value="16" id="pw-length" oninput="document.getElementById('pw-len-val').textContent=this.value;generatePassword();" />
+            <span class="field-val" id="pw-len-val">16</span>
+          </div>
+          <div class="check-grid">
+            <label class="check-label"><input type="checkbox" id="pw-upper" checked onchange="generatePassword()"> A–Z Uppercase</label>
+            <label class="check-label"><input type="checkbox" id="pw-lower" checked onchange="generatePassword()"> a–z Lowercase</label>
+            <label class="check-label"><input type="checkbox" id="pw-nums" checked onchange="generatePassword()"> 0–9 Numbers</label>
+            <label class="check-label"><input type="checkbox" id="pw-syms" checked onchange="generatePassword()"> !@# Symbols</label>
+          </div>
+          <div class="strength-row">
+            <span style="font-size:13px;color:var(--text-secondary);min-width:64px;">Strength</span>
+            <div class="strength-track"><div class="strength-fill" id="pw-strength-bar"></div></div>
+            <span id="pw-strength-label" style="font-size:12px;font-weight:600;min-width:72px;text-align:right;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><a class="logo" href="/" style="margin-bottom:0;"><div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div><span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span></a><p>Free browser-based tools. No signup. No tracking.</p></div>
+        <div class="footer-links-col"><h4>Text Tools</h4><a href="/tools/case-converter/">Case Converter</a><a href="/tools/word-counter/">Word Counter</a><a href="/tools/password-generator/">Password Generator</a><a href="/tools/base64-encoder/">Base64 Encoder</a></div>
+        <div class="footer-links-col"><h4>Other Tools</h4><a href="/tools/bmi-calculator/">BMI Calculator</a><a href="/tools/cgpa-calculator/">CGPA Calculator</a><a href="/tools/compress-image/">Compress Image</a></div>
+        <div class="footer-links-col"><h4>Company</h4><a href="/about/">About</a><a href="/privacy/">Privacy Policy</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 ToolsNest · All tools are free forever</p><div class="footer-bottom-links"><a href="/privacy/">Privacy</a><a href="/about/">About</a></div></div>
+    </div>
+  </footer>
+  <script>
+    function generatePassword() {
+      const len = parseInt(document.getElementById('pw-length').value);
+      const upper = document.getElementById('pw-upper').checked;
+      const lower = document.getElementById('pw-lower').checked;
+      const nums  = document.getElementById('pw-nums').checked;
+      const syms  = document.getElementById('pw-syms').checked;
+      let chars = '';
+      if (upper) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      if (lower) chars += 'abcdefghijklmnopqrstuvwxyz';
+      if (nums)  chars += '0123456789';
+      if (syms)  chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+      if (!chars) { document.getElementById('pw-output').textContent = 'Select at least one option'; return; }
+      const arr = new Uint32Array(len); crypto.getRandomValues(arr);
+      document.getElementById('pw-output').textContent = Array.from(arr).map(v => chars[v % chars.length]).join('');
+      const types = [upper, lower, nums, syms].filter(Boolean).length;
+      const score = Math.min(100, (len / 64) * 50 + (types / 4) * 50);
+      const bar = document.getElementById('pw-strength-bar');
+      const lbl = document.getElementById('pw-strength-label');
+      const levels = [{t:35,c:'#EF4444',l:'Weak'},{t:65,c:'#F59E0B',l:'Fair'},{t:85,c:'#3B82F6',l:'Strong'},{t:101,c:'#10B981',l:'Very Strong'}];
+      const level = levels.find(lv => score < lv.t);
+      bar.style.width = score + '%'; bar.style.background = level.c;
+      lbl.textContent = level.l; lbl.style.color = level.c;
+    }
+    function copyPassword() {
+      const pw = document.getElementById('pw-output').textContent;
+      if (!pw || pw === 'Click Generate' || pw === 'Select at least one option') return;
+      navigator.clipboard.writeText(pw).then(() => {
+        const btn = document.querySelectorAll('.action-row .action-btn')[1];
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+        btn.style.background = '#10B981'; btn.style.color = '#fff'; btn.style.borderColor = '#10B981';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; btn.style.borderColor = ''; }, 1600);
+      });
+    }
+    generatePassword();
+  </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Compressor — Reduce JPEG & PNG Size Free Online | ToolsNest</title>
+  <meta name="description" content="Free online image compressor. Reduce JPEG and PNG file size without losing quality — compress under 100KB, 200KB or 500KB. Works entirely in your browser. No upload to server, 100% private." />
+  <meta name="keywords" content="image compressor, compress image online, reduce image size, jpeg compressor, png compressor, compress image under 100kb, reduce file size" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/compress-image/" />
+
+  <meta property="og:title" content="Free Image Compressor — Compress JPEG & PNG Online | ToolsNest" />
+  <meta property="og:description" content="Reduce JPEG and PNG file size without losing quality. Compress under 100KB, 200KB or 500KB. 100% private — your image never leaves your device." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/compress-image/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Compressor",
+    "description": "Free online tool to compress JPEG and PNG images without losing quality. Works entirely in your browser — no upload to server.",
+    "url": "https://toolsnestindia.netlify.app/tools/compress-image/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "ToolsNest" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/">
+      <div class="logo-icon"><i class="ti ti-tools"></i></div>
+      <span class="logo-text">Tools<span>Nest</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/case-converter/">Case Converter</a>
+      <a href="/tools/word-counter/">Word Counter</a>
+      <a href="/tools/password-generator/">Password Gen</a>
+      <a href="/tools/compress-image/" class="active">Compress Image</a>
+      <a href="/tools/cgpa-calculator/">CGPA</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <i class="ti ti-menu-2"></i>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/passport-photo/">🪪 Passport Photo</a>
+    <a href="/tools/image-to-pdf/">📄 Image to PDF</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+    <a href="/tools/case-converter/">Tt Case Converter</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+    <a href="/tools/password-generator/">🔒 Password Generator</a>
+    <a href="/tools/base64-encoder/">&#60;/&#62; Base64 Encoder</a>
+    <a href="/tools/unit-converter/">📏 Unit Converter</a>
+  </div>
+
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <i class="ti ti-chevron-right"></i>
+        <span>Compress Image</span>
+      </div>
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2>Compress Image</h2>
+          <p>Reduce JPEG or PNG file size. Your image never leaves your device — 100% private.</p>
+        </div>
+
+        <div class="drop-zone" id="drop-zone" onclick="document.getElementById('img-input').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+          <i class="ti ti-cloud-upload"></i>
+          <p>Click to upload or drag &amp; drop</p>
+          <small>JPEG, PNG — up to 10 MB</small>
+        </div>
+        <input type="file" id="img-input" accept="image/jpeg,image/png" onchange="loadImage(event)" style="display:none;" />
+
+        <div style="margin-top:18px;">
+          <div class="field-row">
+            <span class="field-label">Quality</span>
+            <input type="range" min="10" max="95" value="70" id="quality-slider" oninput="document.getElementById('q-val').textContent=this.value+'%'" />
+            <span class="field-val" id="q-val">70%</span>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="cc-btn" onclick="compressUnder100KB()" style="background:#FFF7ED;border-color:#FB923C;color:#EA580C;font-weight:600;">⚡ Under 100 KB</button>
+            <button class="cc-btn" onclick="compressUnder200KB()" style="background:#F0FDF4;border-color:#86EFAC;color:#15803D;font-weight:600;">📦 Under 200 KB</button>
+            <button class="cc-btn" onclick="compressUnder500KB()" style="background:#EFF6FF;border-color:#93C5FD;color:#1D4ED8;font-weight:600;">🗜️ Under 500 KB</button>
+          </div>
+        </div>
+
+        <div class="img-stat-grid" id="img-stats" style="display:none;">
+          <div class="img-stat-card"><div class="val" id="orig-size">—</div><div class="lbl">Original</div></div>
+          <div class="img-stat-card"><div class="val" id="comp-size">—</div><div class="lbl">Compressed</div></div>
+          <div class="img-stat-card"><div class="val" id="savings">—</div><div class="lbl">Saved</div></div>
+        </div>
+        <canvas id="compress-canvas" style="display:none;"></canvas>
+        <div class="action-row" style="margin-top:12px;">
+          <button class="action-btn primary" id="compress-btn" onclick="compressImage()" style="display:none;"><i class="ti ti-download"></i> Compress &amp; Download</button>
+        </div>
+        <img id="img-preview" alt="Preview" style="max-width:100%;border-radius:var(--radius-sm);margin-top:16px;display:none;" />
+      </div>
+
+      <div style="margin-top:32px;padding:24px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+        <h3 style="font-family:var(--font-head);font-size:15px;font-weight:600;margin-bottom:12px;">How to compress an image</h3>
+        <ol style="padding-left:20px;font-size:13px;color:var(--text-secondary);line-height:2;">
+          <li>Click the upload area or drag &amp; drop your JPEG or PNG image.</li>
+          <li>Choose a target size (Under 100 KB, 200 KB, or 500 KB) — or adjust the quality slider.</li>
+          <li>Click <strong>Compress &amp; Download</strong> to save the compressed file.</li>
+        </ol>
+        <p style="margin-top:12px;font-size:13px;color:var(--text-muted);">🔒 Your image is processed entirely in your browser. It is never uploaded to any server.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="/" style="margin-bottom:0;">
+            <div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div>
+            <span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span>
+          </a>
+          <p>Free browser-based tools for text, images and students. No signup. No tracking.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4>Image Tools</h4>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/passport-photo/">Passport Photo</a>
+          <a href="/tools/image-to-pdf/">Image to PDF</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>More Tools</h4>
+          <a href="/tools/bmi-calculator/">BMI Calculator</a>
+          <a href="/tools/cgpa-calculator/">CGPA Calculator</a>
+          <a href="/tools/word-counter/">Word Counter</a>
+          <a href="/tools/password-generator/">Password Generator</a>
+          <a href="/tools/case-converter/">Case Converter</a>
+          <a href="/tools/unit-converter/">Unit Converter</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Company</h4>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ToolsNest · All tools are free forever</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/about/">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let loadedFile = null;
+
+    function handleDragOver(e) { e.preventDefault(); document.getElementById('drop-zone').classList.add('drag-over'); }
+    function handleDragLeave() { document.getElementById('drop-zone').classList.remove('drag-over'); }
+    function handleDrop(e) {
+      e.preventDefault(); document.getElementById('drop-zone').classList.remove('drag-over');
+      const file = e.dataTransfer.files[0];
+      if (file && (file.type === 'image/jpeg' || file.type === 'image/png')) { loadedFile = file; showImagePreview(file); }
+    }
+    function loadImage(e) { const f = e.target.files[0]; if (!f) return; loadedFile = f; showImagePreview(f); }
+
+    function showImagePreview(file) {
+      const kb = (file.size / 1024).toFixed(1);
+      document.getElementById('orig-size').textContent = kb > 1024 ? (kb / 1024).toFixed(1) + ' MB' : kb + ' KB';
+      document.getElementById('comp-size').textContent = '—';
+      document.getElementById('savings').textContent = '—';
+      document.getElementById('img-stats').style.display = 'grid';
+      document.getElementById('compress-btn').style.display = 'block';
+      const reader = new FileReader();
+      reader.onload = ev => { const p = document.getElementById('img-preview'); p.src = ev.target.result; p.style.display = 'block'; };
+      reader.readAsDataURL(file);
+    }
+
+    function compressImage() {
+      if (!loadedFile) return;
+      const quality = parseInt(document.getElementById('quality-slider').value) / 100;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.getElementById('compress-canvas');
+          canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          canvas.toBlob(blob => {
+            if (!blob) return;
+            const ckb = (blob.size / 1024).toFixed(1);
+            const saved = Math.max(0, Math.round((1 - blob.size / loadedFile.size) * 100));
+            document.getElementById('comp-size').textContent = ckb > 1024 ? (ckb / 1024).toFixed(1) + ' MB' : ckb + ' KB';
+            document.getElementById('savings').textContent = saved + '%';
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'toolsnest_' + loadedFile.name;
+            document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+          }, 'image/jpeg', quality);
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(loadedFile);
+    }
+
+    async function compressToTarget(targetKB) {
+      if (!loadedFile) { alert('Please upload an image first.'); return; }
+      if (loadedFile.size / 1024 <= targetKB) {
+        document.getElementById('comp-size').textContent = (loadedFile.size / 1024).toFixed(1) + ' KB';
+        document.getElementById('savings').textContent = '0%';
+        alert('Image is already under ' + targetKB + ' KB!'); return;
+      }
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = new Image();
+        img.onload = async () => {
+          const canvas = document.getElementById('compress-canvas');
+          canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          let lo = 1, hi = 95, bestBlob = null;
+          for (let attempt = 0; attempt < 12; attempt++) {
+            const q = Math.floor((lo + hi) / 2);
+            const blob = await new Promise(res => canvas.toBlob(res, 'image/jpeg', q / 100));
+            if (!blob) break;
+            if (blob.size / 1024 <= targetKB) { bestBlob = blob; lo = q + 1; }
+            else { hi = q - 1; }
+            if (lo > hi) break;
+          }
+          if (!bestBlob || bestBlob.size / 1024 > targetKB) {
+            let scale = 0.9;
+            while (scale > 0.1) {
+              const c2 = document.createElement('canvas');
+              c2.width = Math.round(img.naturalWidth * scale);
+              c2.height = Math.round(img.naturalHeight * scale);
+              c2.getContext('2d').drawImage(img, 0, 0, c2.width, c2.height);
+              const blob = await new Promise(res => c2.toBlob(res, 'image/jpeg', 0.7));
+              if (blob && blob.size / 1024 <= targetKB) { bestBlob = blob; break; }
+              scale -= 0.1;
+            }
+          }
+          if (!bestBlob) { alert('Could not compress to under ' + targetKB + ' KB. Try a smaller image.'); return; }
+          const ckb = (bestBlob.size / 1024).toFixed(1);
+          const saved = Math.max(0, Math.round((1 - bestBlob.size / loadedFile.size) * 100));
+          document.getElementById('comp-size').textContent = ckb + ' KB';
+          document.getElementById('savings').textContent = saved + '%';
+          const url = URL.createObjectURL(bestBlob);
+          const a = document.createElement('a');
+          a.href = url; a.download = 'toolsnest_under' + targetKB + 'kb_' + loadedFile.name;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(loadedFile);
+    }
+    function compressUnder100KB() { compressToTarget(100); }
+    function compressUnder200KB() { compressToTarget(200); }
+    function compressUnder500KB() { compressToTarget(500); }
+  </script>
+</body>
+</html>

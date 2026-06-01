@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToolsNest — Free Online Tools: Image Compressor, BMI Calculator, CGPA & More</title>
+  <meta name="description" content="Free online tools for everyone — image compressor, passport photo maker, image to PDF, BMI calculator, CGPA calculator, word counter, password generator and more. No signup, no ads, works in your browser." />
+  <meta name="keywords" content="free online tools, image compressor, passport photo maker, image to pdf, bmi calculator, cgpa calculator, word counter, password generator, case converter, base64 encoder" />
+  <meta name="author" content="ToolsNest" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/" />
+
+  <meta property="og:title" content="ToolsNest — Free Online Tools" />
+  <meta property="og:description" content="Image compressor, passport photo maker, BMI calculator, CGPA calculator and more. All free, no signup, works in your browser." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "ToolsNest",
+    "url": "https://toolsnestindia.netlify.app/",
+    "description": "Free online tools for everyone — image compressor, passport photo maker, BMI calculator, CGPA calculator and more.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://toolsnestindia.netlify.app/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+
+  <nav id="main-nav">
+    <a class="logo" href="/">
+      <div class="logo-icon"><i class="ti ti-tools"></i></div>
+      <span class="logo-text">Tools<span>Nest</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="/" class="active">Home</a>
+      <a href="/tools/case-converter/">Case Converter</a>
+      <a href="/tools/word-counter/">Word Counter</a>
+      <a href="/tools/password-generator/">Password Gen</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+      <a href="/tools/cgpa-calculator/">CGPA</a>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <i class="ti ti-menu-2"></i>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/case-converter/">Tt Case Converter</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+    <a href="/tools/password-generator/">🔒 Password Generator</a>
+    <a href="/tools/base64-encoder/">&#60;/&#62; Base64 Encoder</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+    <a href="/tools/image-to-pdf/">📄 Image to PDF</a>
+    <a href="/tools/passport-photo/">🪪 Passport Photo</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/unit-converter/">📏 Unit Converter</a>
+  </div>
+
+  <main style="flex:1;">
+
+    <div class="hero">
+      <div class="hero-badge"><i class="ti ti-bolt"></i> Free · No signup · Browser-based</div>
+      <h1>Smart tools for <span>everyone</span></h1>
+      <p>Image, text and student tools — all in one place, completely free.</p>
+      <div class="hero-search">
+        <input type="text" placeholder="Search tools..." id="search-input" oninput="filterTools(this.value)" autocomplete="off" />
+        <button aria-label="Search"><i class="ti ti-search"></i></button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">12</div><div class="stat-label">Free Tools</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Browser-based</div></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><div class="stat-num">0</div><div class="stat-label">Signups</div></div>
+      </div>
+    </div>
+
+    <div class="cat-wrap">
+      <div class="cat-tabs">
+        <div class="cat-tab active" onclick="filterCat('all',this)"><i class="ti ti-layout-grid"></i> All tools</div>
+        <div class="cat-tab" onclick="filterCat('text',this)"><i class="ti ti-text-size"></i> Text</div>
+        <div class="cat-tab" onclick="filterCat('image',this)"><i class="ti ti-photo"></i> Image</div>
+        <div class="cat-tab" onclick="filterCat('student',this)"><i class="ti ti-school"></i> Student</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">All tools</div>
+        <div class="section-line"></div>
+        <div class="section-count" id="tool-count">12 tools</div>
+      </div>
+      <div class="tools-grid" id="tools-grid">
+
+        <a class="tool-card" href="/tools/compress-image/" data-cat="image" data-name="compress image reduce file size jpeg png photo">
+          <div class="badge badge-popular">Popular</div>
+          <div class="tool-icon" style="background:#F0FDF4;color:#15803D;"><i class="ti ti-photo-down"></i></div>
+          <h3>Compress Image</h3>
+          <p>Reduce JPEG/PNG file size without losing quality. 100% private.</p>
+          <span class="tool-tag tag-image">Image</span>
+        </a>
+
+        <a class="tool-card" href="/tools/passport-photo/" data-cat="image" data-name="passport photo maker resize crop id photo india us uk pan aadhaar">
+          <div class="badge badge-popular">Popular</div>
+          <div class="tool-icon" style="background:#F5F3FF;color:#7C3AED;"><i class="ti ti-id-badge"></i></div>
+          <h3>Passport Photo Maker</h3>
+          <p>Crop and resize any photo to standard passport and ID photo sizes.</p>
+          <span class="tool-tag tag-image">Image</span>
+        </a>
+
+        <a class="tool-card" href="/tools/image-to-pdf/" data-cat="image" data-name="image to pdf convert jpg png photo">
+          <div class="badge badge-new">New</div>
+          <div class="tool-icon" style="background:#FFF7ED;color:#EA580C;"><i class="ti ti-file-type-pdf"></i></div>
+          <h3>Image to PDF</h3>
+          <p>Convert JPG or PNG images to a PDF file instantly in your browser.</p>
+          <span class="tool-tag tag-image">Image</span>
+        </a>
+
+        <a class="tool-card" href="/tools/bmi-calculator/" data-cat="student" data-name="bmi calculator body mass index health weight height">
+          <div class="badge badge-new">New</div>
+          <div class="tool-icon" style="background:#F0FDF4;color:#15803D;"><i class="ti ti-activity"></i></div>
+          <h3>BMI Calculator</h3>
+          <p>Calculate your Body Mass Index and find out your health category instantly.</p>
+          <span class="tool-tag tag-student">Health</span>
+        </a>
+
+        <a class="tool-card" href="/tools/cgpa-calculator/" data-cat="student" data-name="cgpa calculator gpa grades semester credit hours">
+          <div class="tool-icon" style="background:#FFFBEB;color:#B45309;"><i class="ti ti-calculator"></i></div>
+          <h3>CGPA Calculator</h3>
+          <p>Calculate your CGPA from grades and credit hours instantly.</p>
+          <span class="tool-tag tag-student">Student</span>
+        </a>
+
+        <a class="tool-card" href="/tools/case-converter/" data-cat="text" data-name="case converter text uppercase lowercase title camel snake kebab">
+          <div class="badge badge-popular">Popular</div>
+          <div class="tool-icon" style="background:#EFF6FF;color:#2563EB;"><i class="ti ti-text-size"></i></div>
+          <h3>Case Converter</h3>
+          <p>Uppercase, lowercase, title case, camelCase, snake_case and more.</p>
+          <span class="tool-tag tag-text">Text</span>
+        </a>
+
+        <a class="tool-card" href="/tools/word-counter/" data-cat="text" data-name="word counter character count sentences paragraphs reading time">
+          <div class="badge badge-popular">Popular</div>
+          <div class="tool-icon" style="background:#EFF6FF;color:#2563EB;"><i class="ti ti-number"></i></div>
+          <h3>Word Counter</h3>
+          <p>Count words, characters, sentences and paragraphs in real time.</p>
+          <span class="tool-tag tag-text">Text</span>
+        </a>
+
+        <a class="tool-card" href="/tools/password-generator/" data-cat="text" data-name="password generator strong secure random">
+          <div class="badge badge-new">New</div>
+          <div class="tool-icon" style="background:#FFF1F2;color:#E11D48;"><i class="ti ti-lock"></i></div>
+          <h3>Password Generator</h3>
+          <p>Generate strong, secure passwords with custom options.</p>
+          <span class="tool-tag tag-text">Text</span>
+        </a>
+
+        <a class="tool-card" href="/tools/base64-encoder/" data-cat="text" data-name="base64 encode decode converter developer tool">
+          <div class="tool-icon" style="background:#F0FDF4;color:#15803D;"><i class="ti ti-code"></i></div>
+          <h3>Base64 Encoder</h3>
+          <p>Encode or decode Base64 text instantly. Essential for developers.</p>
+          <span class="tool-tag tag-text">Text</span>
+        </a>
+
+        <a class="tool-card" href="/tools/citation-generator/" data-cat="student" data-name="citation generator apa mla chicago reference bibliography">
+          <div class="badge badge-new">New</div>
+          <div class="tool-icon" style="background:#FFFBEB;color:#B45309;"><i class="ti ti-quote"></i></div>
+          <h3>Citation Generator</h3>
+          <p>Generate APA, MLA and Chicago citations for books, websites and journals.</p>
+          <span class="tool-tag tag-student">Student</span>
+        </a>
+
+        <a class="tool-card" href="/tools/assignment-formatter/" data-cat="student" data-name="assignment formatter cover page title page student">
+          <div class="tool-icon" style="background:#FFFBEB;color:#B45309;"><i class="ti ti-file-text"></i></div>
+          <h3>Assignment Formatter</h3>
+          <p>Generate a professional assignment cover page ready to print.</p>
+          <span class="tool-tag tag-student">Student</span>
+        </a>
+
+        <a class="tool-card" href="/tools/unit-converter/" data-cat="text" data-name="unit converter cm to feet inch meter kg pounds length weight temperature">
+          <div class="badge badge-new">New</div>
+          <div class="tool-icon" style="background:#EFF6FF;color:#2563EB;"><i class="ti ti-arrows-exchange"></i></div>
+          <h3>Unit Converter</h3>
+          <p>Convert length, weight and temperature units — cm to feet, kg to lbs and more.</p>
+          <span class="tool-tag tag-text">Utility</span>
+        </a>
+
+      </div>
+      <div id="no-results"><i class="ti ti-search-off"></i>No tools found. Try a different keyword.</div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="/" style="margin-bottom:0;">
+            <div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div>
+            <span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span>
+          </a>
+          <p>Free browser-based tools for text, images and students. No signup. No tracking.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4>Tools</h4>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/passport-photo/">Passport Photo</a>
+          <a href="/tools/image-to-pdf/">Image to PDF</a>
+          <a href="/tools/bmi-calculator/">BMI Calculator</a>
+          <a href="/tools/cgpa-calculator/">CGPA Calculator</a>
+          <a href="/tools/case-converter/">Case Converter</a>
+          <a href="/tools/word-counter/">Word Counter</a>
+          <a href="/tools/password-generator/">Password Generator</a>
+          <a href="/tools/base64-encoder/">Base64 Encoder</a>
+          <a href="/tools/citation-generator/">Citation Generator</a>
+          <a href="/tools/assignment-formatter/">Assignment Formatter</a>
+          <a href="/tools/unit-converter/">Unit Converter</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Company</h4>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ToolsNest · Made with ❤️ · All tools are free forever</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/about/">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function filterCat(cat, el) {
+      document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      let visible = 0;
+      document.querySelectorAll('.tool-card').forEach(card => {
+        const show = cat === 'all' || card.dataset.cat === cat;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('tool-count').textContent = visible + ' tool' + (visible !== 1 ? 's' : '');
+    }
+    function filterTools(val) {
+      const q = val.toLowerCase().trim();
+      let visible = 0;
+      document.querySelectorAll('.tool-card').forEach(card => {
+        const match = !q || card.dataset.name.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      document.getElementById('no-results').style.display = visible === 0 ? 'block' : 'none';
+      document.getElementById('tool-count').textContent = visible + ' tool' + (visible !== 1 ? 's' : '');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMI Calculator — Free Online Body Mass Index Calculator | ToolsNest</title>
+  <meta name="description" content="Free BMI calculator. Enter your height and weight in metric (cm/kg) or imperial (ft/lbs) to calculate your Body Mass Index and find your health category — underweight, normal, overweight or obese." />
+  <meta name="keywords" content="bmi calculator, body mass index calculator, bmi calculator online, bmi calculator india, bmi kg cm, calculate bmi, healthy weight calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/bmi-calculator/" />
+
+  <meta property="og:title" content="Free BMI Calculator — Body Mass Index Online | ToolsNest" />
+  <meta property="og:description" content="Calculate your BMI instantly. Enter height and weight in metric or imperial units and see your health category. Free, no signup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/bmi-calculator/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BMI Calculator",
+    "description": "Free online BMI calculator. Enter your height and weight in metric or imperial units to calculate your Body Mass Index and health category.",
+    "url": "https://toolsnestindia.netlify.app/tools/bmi-calculator/",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "ToolsNest" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/">
+      <div class="logo-icon"><i class="ti ti-tools"></i></div>
+      <span class="logo-text">Tools<span>Nest</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+      <a href="/tools/passport-photo/">Passport Photo</a>
+      <a href="/tools/cgpa-calculator/">CGPA</a>
+      <a href="/tools/bmi-calculator/" class="active">BMI Calculator</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <i class="ti ti-menu-2"></i>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/passport-photo/">🪪 Passport Photo</a>
+    <a href="/tools/image-to-pdf/">📄 Image to PDF</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+    <a href="/tools/password-generator/">🔒 Password Generator</a>
+    <a href="/tools/unit-converter/">📏 Unit Converter</a>
+  </div>
+
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <i class="ti ti-chevron-right"></i>
+        <span>BMI Calculator</span>
+      </div>
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2>BMI Calculator</h2>
+          <p>Enter your height and weight to calculate your Body Mass Index.</p>
+        </div>
+
+        <div class="toggle-row" style="margin-bottom:20px;">
+          <button class="toggle-btn active" id="bmi-metric-btn" onclick="setBmiUnit('metric')">Metric (cm/kg)</button>
+          <button class="toggle-btn" id="bmi-imperial-btn" onclick="setBmiUnit('imperial')">Imperial (ft/lbs)</button>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;" id="bmi-h-label">Height (cm)</label>
+            <input type="number" id="bmi-height" placeholder="e.g. 170" class="cc-textarea" style="min-height:unset;padding:10px 12px;" oninput="calcBMI()" />
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;" id="bmi-w-label">Weight (kg)</label>
+            <input type="number" id="bmi-weight" placeholder="e.g. 65" class="cc-textarea" style="min-height:unset;padding:10px 12px;" oninput="calcBMI()" />
+          </div>
+        </div>
+
+        <div id="bmi-result" style="display:none;">
+          <div style="background:var(--brand-light);border:1px solid var(--brand-mid);border-radius:var(--radius);padding:24px;text-align:center;margin-bottom:16px;">
+            <div style="font-family:var(--font-head);font-size:56px;font-weight:600;color:var(--brand);letter-spacing:-0.03em;line-height:1;" id="bmi-value">—</div>
+            <div style="font-size:16px;font-weight:600;margin-top:8px;" id="bmi-category"></div>
+            <div style="font-size:13px;color:var(--text-secondary);margin-top:4px;" id="bmi-msg"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+            <div class="stat-card" style="background:#EFF6FF;border-color:#BFDBFE;"><div class="val" style="font-size:13px;color:#1D4ED8;">Under 18.5</div><div class="lbl">Underweight</div></div>
+            <div class="stat-card" style="background:#F0FDF4;border-color:#86EFAC;"><div class="val" style="font-size:13px;color:#15803D;">18.5 – 24.9</div><div class="lbl">Normal</div></div>
+            <div class="stat-card" style="background:#FFFBEB;border-color:#FCD34D;"><div class="val" style="font-size:13px;color:#B45309;">25 – 29.9</div><div class="lbl">Overweight</div></div>
+            <div class="stat-card" style="background:#FFF1F2;border-color:#FECDD3;"><div class="val" style="font-size:13px;color:#BE123C;">30+</div><div class="lbl">Obese</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;padding:24px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+        <h3 style="font-family:var(--font-head);font-size:15px;font-weight:600;margin-bottom:12px;">What is BMI?</h3>
+        <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;margin-bottom:10px;">Body Mass Index (BMI) is a simple measure that uses your height and weight to estimate whether you are underweight, a healthy weight, overweight, or obese.</p>
+        <p style="font-size:13px;color:var(--text-secondary);line-height:1.7;"><strong>Formula:</strong> BMI = weight (kg) ÷ height² (m²)</p>
+        <p style="font-size:12px;color:var(--text-muted);margin-top:12px;">Note: BMI is a screening tool, not a diagnostic tool. Consult a healthcare professional for medical advice.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="/" style="margin-bottom:0;">
+            <div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div>
+            <span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span>
+          </a>
+          <p>Free browser-based tools. No signup. No tracking.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4>Health & Student</h4>
+          <a href="/tools/bmi-calculator/">BMI Calculator</a>
+          <a href="/tools/cgpa-calculator/">CGPA Calculator</a>
+          <a href="/tools/citation-generator/">Citation Generator</a>
+          <a href="/tools/assignment-formatter/">Assignment Formatter</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Image Tools</h4>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/passport-photo/">Passport Photo</a>
+          <a href="/tools/image-to-pdf/">Image to PDF</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Company</h4>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ToolsNest · All tools are free forever</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/about/">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let bmiUnit = 'metric';
+
+    function setBmiUnit(unit) {
+      bmiUnit = unit;
+      document.getElementById('bmi-metric-btn').classList.toggle('active', unit === 'metric');
+      document.getElementById('bmi-imperial-btn').classList.toggle('active', unit === 'imperial');
+      document.getElementById('bmi-h-label').textContent = unit === 'metric' ? 'Height (cm)' : 'Height (inches)';
+      document.getElementById('bmi-w-label').textContent = unit === 'metric' ? 'Weight (kg)' : 'Weight (lbs)';
+      document.getElementById('bmi-height').placeholder = unit === 'metric' ? 'e.g. 170' : 'e.g. 67';
+      document.getElementById('bmi-weight').placeholder = unit === 'metric' ? 'e.g. 65' : 'e.g. 143';
+      document.getElementById('bmi-height').value = '';
+      document.getElementById('bmi-weight').value = '';
+      document.getElementById('bmi-result').style.display = 'none';
+    }
+
+    function calcBMI() {
+      const h = parseFloat(document.getElementById('bmi-height').value);
+      const w = parseFloat(document.getElementById('bmi-weight').value);
+      if (!h || !w || h <= 0 || w <= 0) { document.getElementById('bmi-result').style.display = 'none'; return; }
+      let bmi;
+      if (bmiUnit === 'metric') { const hm = h / 100; bmi = w / (hm * hm); }
+      else { bmi = (703 * w) / (h * h); }
+      bmi = Math.round(bmi * 10) / 10;
+      let cat, color, msg;
+      if (bmi < 18.5)    { cat = 'Underweight'; color = '#1D4ED8'; msg = 'Consider consulting a nutritionist for a healthy diet plan.'; }
+      else if (bmi < 25) { cat = 'Normal weight ✅'; color = '#15803D'; msg = 'Great! You are in a healthy weight range. Keep it up!'; }
+      else if (bmi < 30) { cat = 'Overweight'; color = '#B45309'; msg = 'Consider increasing physical activity and a balanced diet.'; }
+      else               { cat = 'Obese'; color = '#BE123C'; msg = 'Please consult a healthcare professional for guidance.'; }
+      document.getElementById('bmi-value').textContent = bmi;
+      document.getElementById('bmi-category').textContent = cat;
+      document.getElementById('bmi-category').style.color = color;
+      document.getElementById('bmi-msg').textContent = msg;
+      document.getElementById('bmi-result').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

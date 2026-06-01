@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base64 Encoder Decoder — Free Online Tool | ToolsNest</title>
+  <meta name="description" content="Free online Base64 encoder and decoder. Encode plain text to Base64 or decode Base64 strings back to plain text instantly. Essential developer tool, no signup required." />
+  <meta name="keywords" content="base64 encoder, base64 decoder, base64 encode online, base64 decode online, base64 converter, encode decode base64" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/base64-encoder/" />
+  <meta property="og:title" content="Free Base64 Encoder & Decoder Online | ToolsNest" />
+  <meta property="og:description" content="Encode plain text to Base64 or decode Base64 back to text. Free, instant developer tool. No signup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/base64-encoder/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Base64 Encoder Decoder","description":"Free online Base64 encoder and decoder. Encode plain text to Base64 or decode Base64 strings instantly.","url":"https://toolsnestindia.netlify.app/tools/base64-encoder/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+  <nav>
+    <a class="logo" href="/"><div class="logo-icon"><i class="ti ti-tools"></i></div><span class="logo-text">Tools<span>Nest</span></span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/case-converter/">Case Converter</a>
+      <a href="/tools/word-counter/">Word Counter</a>
+      <a href="/tools/base64-encoder/" class="active">Base64</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/base64-encoder/">&#60;/&#62; Base64 Encoder</a>
+    <a href="/tools/case-converter/">Tt Case Converter</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+  </div>
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb"><a href="/">Home</a><i class="ti ti-chevron-right"></i><span>Base64 Encoder</span></div>
+      <div class="panel-card">
+        <div class="panel-header"><h2>Base64 Encoder / Decoder</h2><p>Encode plain text to Base64 or decode Base64 back to plain text.</p></div>
+        <div class="toggle-row">
+          <button class="toggle-btn active" id="b64-enc-btn" onclick="setB64Mode('encode')">Encode →</button>
+          <button class="toggle-btn" id="b64-dec-btn" onclick="setB64Mode('decode')">← Decode</button>
+        </div>
+        <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);" id="b64-in-label">Plain Text Input</label>
+        <textarea class="cc-textarea" id="b64-input" placeholder="Enter text to encode..." style="margin-top:8px;"></textarea>
+        <div class="action-row" style="margin:12px 0;">
+          <button class="action-btn primary" onclick="convertB64()"><i class="ti ti-transfer"></i> Convert</button>
+        </div>
+        <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);display:block;margin-bottom:8px;" id="b64-out-label">Base64 Output</label>
+        <div class="result-box" id="b64-output">Result will appear here...</div>
+        <div class="action-row" style="margin-top:10px;">
+          <button class="action-btn" onclick="copyB64()"><i class="ti ti-copy"></i> Copy result</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><a class="logo" href="/" style="margin-bottom:0;"><div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div><span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span></a><p>Free browser-based tools. No signup. No tracking.</p></div>
+        <div class="footer-links-col"><h4>Text Tools</h4><a href="/tools/case-converter/">Case Converter</a><a href="/tools/word-counter/">Word Counter</a><a href="/tools/password-generator/">Password Generator</a><a href="/tools/base64-encoder/">Base64 Encoder</a></div>
+        <div class="footer-links-col"><h4>Other Tools</h4><a href="/tools/bmi-calculator/">BMI Calculator</a><a href="/tools/cgpa-calculator/">CGPA Calculator</a><a href="/tools/compress-image/">Compress Image</a></div>
+        <div class="footer-links-col"><h4>Company</h4><a href="/about/">About</a><a href="/privacy/">Privacy Policy</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 ToolsNest · All tools are free forever</p><div class="footer-bottom-links"><a href="/privacy/">Privacy</a><a href="/about/">About</a></div></div>
+    </div>
+  </footer>
+  <script>
+    let b64Mode = 'encode';
+    function setB64Mode(mode) {
+      b64Mode = mode;
+      document.getElementById('b64-enc-btn').classList.toggle('active', mode === 'encode');
+      document.getElementById('b64-dec-btn').classList.toggle('active', mode === 'decode');
+      document.getElementById('b64-in-label').textContent = mode === 'encode' ? 'Plain Text Input' : 'Base64 Input';
+      document.getElementById('b64-out-label').textContent = mode === 'encode' ? 'Base64 Output' : 'Decoded Text';
+      document.getElementById('b64-input').placeholder = mode === 'encode' ? 'Enter text to encode...' : 'Paste Base64 string to decode...';
+      document.getElementById('b64-output').textContent = 'Result will appear here...';
+      document.getElementById('b64-output').style.color = '';
+    }
+    function convertB64() {
+      const input = document.getElementById('b64-input').value.trim();
+      if (!input) { document.getElementById('b64-output').textContent = 'Please enter some text above.'; return; }
+      try {
+        const result = b64Mode === 'encode' ? btoa(unescape(encodeURIComponent(input))) : decodeURIComponent(escape(atob(input)));
+        document.getElementById('b64-output').textContent = result;
+        document.getElementById('b64-output').style.color = 'var(--text-primary)';
+      } catch(e) {
+        document.getElementById('b64-output').textContent = 'Error: Invalid ' + (b64Mode === 'decode' ? 'Base64 string.' : 'input.');
+        document.getElementById('b64-output').style.color = '#EF4444';
+      }
+    }
+    function copyB64() {
+      const txt = document.getElementById('b64-output').textContent;
+      if (!txt || txt.includes('appear here') || txt.includes('Error') || txt.includes('Please')) return;
+      navigator.clipboard.writeText(txt).then(() => {
+        const btn = document.querySelector('.action-row:last-child .action-btn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+        btn.style.background = '#10B981'; btn.style.color = '#fff'; btn.style.borderColor = '#10B981';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; btn.style.borderColor = ''; }, 1600);
+      });
+    }
+  </script>
+</body>
+</html>

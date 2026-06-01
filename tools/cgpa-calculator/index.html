@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGPA Calculator — Free Online GPA & Grade Calculator for Indian Universities | ToolsNest</title>
+  <meta name="description" content="Free CGPA calculator for Indian universities. Enter your subjects, grades (O, A+, A, B+, B, C, F) and credit hours to calculate your CGPA instantly. Supports 10-point grading scale." />
+  <meta name="keywords" content="cgpa calculator, cgpa calculator online, gpa calculator india, cgpa to percentage, grade calculator, credit hours calculator, anna university cgpa, srm cgpa calculator" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/cgpa-calculator/" />
+
+  <meta property="og:title" content="Free CGPA Calculator — Indian University Grade Calculator | ToolsNest" />
+  <meta property="og:description" content="Calculate your CGPA from grades and credit hours. Supports O, A+, A, B+, B, C grading on a 10-point scale. Free, instant, no signup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/cgpa-calculator/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "CGPA Calculator",
+    "description": "Free online CGPA calculator for Indian universities. Enter subjects, grades and credit hours to calculate your Cumulative Grade Point Average on a 10-point scale.",
+    "url": "https://toolsnestindia.netlify.app/tools/cgpa-calculator/",
+    "applicationCategory": "EducationApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "ToolsNest" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/">
+      <div class="logo-icon"><i class="ti ti-tools"></i></div>
+      <span class="logo-text">Tools<span>Nest</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+      <a href="/tools/bmi-calculator/">BMI</a>
+      <a href="/tools/cgpa-calculator/" class="active">CGPA Calculator</a>
+      <a href="/tools/citation-generator/">Citation</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <i class="ti ti-menu-2"></i>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/passport-photo/">🪪 Passport Photo</a>
+    <a href="/tools/image-to-pdf/">📄 Image to PDF</a>
+    <a href="/tools/citation-generator/">📚 Citation Generator</a>
+    <a href="/tools/assignment-formatter/">📝 Assignment Formatter</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+  </div>
+
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <i class="ti ti-chevron-right"></i>
+        <span>CGPA Calculator</span>
+      </div>
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2>CGPA Calculator</h2>
+          <p>Enter your subjects, grades, and credit hours to calculate your CGPA.</p>
+        </div>
+
+        <table class="cgpa-table">
+          <thead>
+            <tr>
+              <th>Subject</th>
+              <th style="width:130px;">Grade</th>
+              <th style="width:95px;">Credits</th>
+              <th style="width:44px;"></th>
+            </tr>
+          </thead>
+          <tbody id="cgpa-body">
+            <tr>
+              <td><input type="text" placeholder="Mathematics" /></td>
+              <td><select onchange="calcCGPA()"><option value="10">O (10)</option><option value="9">A+ (9)</option><option value="8" selected>A (8)</option><option value="7">B+ (7)</option><option value="6">B (6)</option><option value="5">C (5)</option><option value="0">F (0)</option></select></td>
+              <td><input type="number" value="4" min="1" max="6" oninput="calcCGPA()" /></td>
+              <td><button onclick="removeRow(this)" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;line-height:1;" aria-label="Remove"><i class="ti ti-x"></i></button></td>
+            </tr>
+            <tr>
+              <td><input type="text" placeholder="Physics" /></td>
+              <td><select onchange="calcCGPA()"><option value="10">O (10)</option><option value="9" selected>A+ (9)</option><option value="8">A (8)</option><option value="7">B+ (7)</option><option value="6">B (6)</option><option value="5">C (5)</option><option value="0">F (0)</option></select></td>
+              <td><input type="number" value="3" min="1" max="6" oninput="calcCGPA()" /></td>
+              <td><button onclick="removeRow(this)" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;line-height:1;" aria-label="Remove"><i class="ti ti-x"></i></button></td>
+            </tr>
+            <tr>
+              <td><input type="text" placeholder="English" /></td>
+              <td><select onchange="calcCGPA()"><option value="10">O (10)</option><option value="9">A+ (9)</option><option value="8">A (8)</option><option value="7" selected>B+ (7)</option><option value="6">B (6)</option><option value="5">C (5)</option><option value="0">F (0)</option></select></td>
+              <td><input type="number" value="3" min="1" max="6" oninput="calcCGPA()" /></td>
+              <td><button onclick="removeRow(this)" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;line-height:1;" aria-label="Remove"><i class="ti ti-x"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="action-row">
+          <button class="action-btn" onclick="addRow()"><i class="ti ti-plus"></i> Add subject</button>
+          <button class="action-btn primary" onclick="calcCGPA()"><i class="ti ti-calculator"></i> Calculate</button>
+        </div>
+
+        <div class="cgpa-result">
+          <div class="cgpa-num" id="cgpa-num">—</div>
+          <div class="cgpa-grade" id="cgpa-grade">Add subjects above and click Calculate</div>
+        </div>
+      </div>
+
+      <div style="margin-top:32px;padding:24px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+        <h3 style="font-family:var(--font-head);font-size:15px;font-weight:600;margin-bottom:12px;">Grading scale (10-point system)</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;">
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;text-align:center;"><strong>O</strong><span style="display:block;color:var(--text-muted);">10 points</span></div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;text-align:center;"><strong>A+</strong><span style="display:block;color:var(--text-muted);">9 points</span></div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;text-align:center;"><strong>A</strong><span style="display:block;color:var(--text-muted);">8 points</span></div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;text-align:center;"><strong>B+</strong><span style="display:block;color:var(--text-muted);">7 points</span></div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;text-align:center;"><strong>B</strong><span style="display:block;color:var(--text-muted);">6 points</span></div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;text-align:center;"><strong>C</strong><span style="display:block;color:var(--text-muted);">5 points</span></div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:10px 12px;font-size:13px;text-align:center;"><strong>F</strong><span style="display:block;color:var(--text-muted);">0 points</span></div>
+        </div>
+        <p style="margin-top:14px;font-size:13px;color:var(--text-secondary);">Formula: CGPA = Σ(Grade Points × Credits) ÷ Σ(Credits)</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="/" style="margin-bottom:0;">
+            <div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div>
+            <span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span>
+          </a>
+          <p>Free browser-based tools. No signup. No tracking.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4>Student Tools</h4>
+          <a href="/tools/cgpa-calculator/">CGPA Calculator</a>
+          <a href="/tools/bmi-calculator/">BMI Calculator</a>
+          <a href="/tools/citation-generator/">Citation Generator</a>
+          <a href="/tools/assignment-formatter/">Assignment Formatter</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Image Tools</h4>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/passport-photo/">Passport Photo</a>
+          <a href="/tools/image-to-pdf/">Image to PDF</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Company</h4>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ToolsNest · All tools are free forever</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/about/">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function addRow() {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><input type="text" placeholder="Subject name"/></td>
+        <td><select onchange="calcCGPA()"><option value="10">O (10)</option><option value="9">A+ (9)</option><option value="8" selected>A (8)</option><option value="7">B+ (7)</option><option value="6">B (6)</option><option value="5">C (5)</option><option value="0">F (0)</option></select></td>
+        <td><input type="number" value="3" min="1" max="6" oninput="calcCGPA()"/></td>
+        <td><button onclick="removeRow(this)" style="background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;line-height:1;"><i class="ti ti-x"></i></button></td>`;
+      document.getElementById('cgpa-body').appendChild(tr);
+      calcCGPA();
+    }
+
+    function removeRow(btn) {
+      if (document.querySelectorAll('#cgpa-body tr').length > 1) { btn.closest('tr').remove(); calcCGPA(); }
+    }
+
+    function calcCGPA() {
+      let pts = 0, creds = 0;
+      document.querySelectorAll('#cgpa-body tr').forEach(row => {
+        const g = parseFloat(row.querySelector('select').value) || 0;
+        const c = parseFloat(row.querySelector('input[type=number]').value) || 0;
+        pts += g * c; creds += c;
+      });
+      if (creds === 0) return;
+      const cgpa = (pts / creds).toFixed(2);
+      document.getElementById('cgpa-num').textContent = cgpa;
+      const lbl = cgpa >= 9 ? '🏆 Outstanding — O Grade' : cgpa >= 8 ? '⭐ Excellent — A+ Grade' : cgpa >= 7 ? '👍 Very Good — A Grade' : cgpa >= 6 ? '✅ Good — B+ Grade' : cgpa >= 5 ? '📚 Average — B Grade' : '💪 Below average — keep working!';
+      document.getElementById('cgpa-grade').textContent = lbl + ' · ' + creds + ' total credits';
+    }
+
+    calcCGPA();
+  </script>
+</body>
+</html>

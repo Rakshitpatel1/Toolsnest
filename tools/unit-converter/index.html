@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unit Converter — Free Online Length, Weight & Temperature Converter | ToolsNest</title>
+  <meta name="description" content="Free online unit converter. Convert length (cm to feet, inches to meters), weight (kg to lbs, grams to ounces) and temperature (Celsius to Fahrenheit, Kelvin) instantly." />
+  <meta name="keywords" content="unit converter, cm to feet, kg to lbs, celsius to fahrenheit, length converter, weight converter, temperature converter, unit conversion online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/unit-converter/" />
+  <meta property="og:title" content="Free Unit Converter — Length, Weight & Temperature | ToolsNest" />
+  <meta property="og:description" content="Convert cm to feet, kg to lbs, Celsius to Fahrenheit and more. Free online unit converter, no signup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/unit-converter/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Unit Converter","description":"Free online unit converter for length, weight and temperature. Supports cm to feet, kg to lbs, Celsius to Fahrenheit and more.","url":"https://toolsnestindia.netlify.app/tools/unit-converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+  <nav>
+    <a class="logo" href="/"><div class="logo-icon"><i class="ti ti-tools"></i></div><span class="logo-text">Tools<span>Nest</span></span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/case-converter/">Case Converter</a>
+      <a href="/tools/bmi-calculator/">BMI</a>
+      <a href="/tools/unit-converter/" class="active">Unit Converter</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/unit-converter/">📏 Unit Converter</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+  </div>
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb"><a href="/">Home</a><i class="ti ti-chevron-right"></i><span>Unit Converter</span></div>
+      <div class="panel-card">
+        <div class="panel-header"><h2>Unit Converter</h2><p>Convert between common units of length, weight and temperature.</p></div>
+        <div class="toggle-row" style="margin-bottom:24px;">
+          <button class="toggle-btn active" id="unit-tab-length" onclick="setUnitTab('length')">📏 Length</button>
+          <button class="toggle-btn" id="unit-tab-weight" onclick="setUnitTab('weight')">⚖️ Weight</button>
+          <button class="toggle-btn" id="unit-tab-temp" onclick="setUnitTab('temp')">🌡️ Temperature</button>
+        </div>
+        <div id="unit-fields"></div>
+        <div class="action-row" style="margin-top:16px;">
+          <button class="action-btn primary" onclick="convertUnits()"><i class="ti ti-arrows-exchange"></i> Convert</button>
+          <button class="action-btn" onclick="clearUnits()"><i class="ti ti-trash"></i> Clear</button>
+        </div>
+        <div id="unit-result" style="display:none;margin-top:16px;">
+          <div class="result-box" id="unit-output" style="color:var(--text-primary);font-size:16px;font-weight:500;"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><a class="logo" href="/" style="margin-bottom:0;"><div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div><span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span></a><p>Free browser-based tools. No signup. No tracking.</p></div>
+        <div class="footer-links-col"><h4>Text Tools</h4><a href="/tools/case-converter/">Case Converter</a><a href="/tools/word-counter/">Word Counter</a><a href="/tools/password-generator/">Password Generator</a><a href="/tools/unit-converter/">Unit Converter</a></div>
+        <div class="footer-links-col"><h4>Other Tools</h4><a href="/tools/bmi-calculator/">BMI Calculator</a><a href="/tools/cgpa-calculator/">CGPA Calculator</a><a href="/tools/compress-image/">Compress Image</a></div>
+        <div class="footer-links-col"><h4>Company</h4><a href="/about/">About</a><a href="/privacy/">Privacy Policy</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 ToolsNest · All tools are free forever</p><div class="footer-bottom-links"><a href="/privacy/">Privacy</a><a href="/about/">About</a></div></div>
+    </div>
+  </footer>
+  <script>
+    let unitTab = 'length';
+    const unitDefs = {
+      length: { label:'Length', units:['Millimeter (mm)','Centimeter (cm)','Meter (m)','Kilometer (km)','Inch (in)','Feet (ft)','Yard (yd)','Mile (mi)'], toBase:[0.001,0.01,1,1000,0.0254,0.3048,0.9144,1609.344] },
+      weight: { label:'Weight', units:['Milligram (mg)','Gram (g)','Kilogram (kg)','Metric Ton (t)','Ounce (oz)','Pound (lb)','Stone (st)'], toBase:[0.000001,0.001,1,1000,0.0283495,0.453592,6.35029] },
+      temp:   { label:'Temperature', units:['Celsius (°C)','Fahrenheit (°F)','Kelvin (K)'], toBase:null }
+    };
+    function setUnitTab(tab) {
+      unitTab = tab;
+      ['length','weight','temp'].forEach(t => document.getElementById('unit-tab-'+t).classList.toggle('active', t === tab));
+      renderUnitFields();
+      document.getElementById('unit-result').style.display = 'none';
+    }
+    function renderUnitFields() {
+      const def = unitDefs[unitTab];
+      const makeSelect = id => '<select id="'+id+'" style="width:100%;border:1px solid var(--border-strong);border-radius:var(--radius-xs);padding:9px 12px;font-size:13px;font-family:var(--font-body);outline:none;background:var(--surface);color:var(--text-primary);">'+def.units.map((u,i) => '<option value="'+i+'">'+u+'</option>').join('')+'</select>';
+      document.getElementById('unit-fields').innerHTML = `<div style="display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;"><div style="display:flex;flex-direction:column;gap:6px;"><label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Value</label><input type="number" id="unit-input" placeholder="Enter value" class="cc-textarea" style="min-height:unset;padding:10px 12px;" onkeydown="if(event.key==='Enter')convertUnits()" /></div><div style="display:flex;flex-direction:column;gap:6px;"><label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">From</label>${makeSelect('unit-from')}</div><div style="display:flex;flex-direction:column;gap:6px;"><label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">To</label>${makeSelect('unit-to')}</div></div>`;
+      if (unitTab === 'length') { document.getElementById('unit-from').value = 1; document.getElementById('unit-to').value = 4; }
+      if (unitTab === 'weight') { document.getElementById('unit-from').value = 2; document.getElementById('unit-to').value = 5; }
+    }
+    function convertUnits() {
+      const val = parseFloat(document.getElementById('unit-input').value);
+      if (isNaN(val)) { document.getElementById('unit-result').style.display = 'none'; return; }
+      const fromIdx = parseInt(document.getElementById('unit-from').value);
+      const toIdx   = parseInt(document.getElementById('unit-to').value);
+      const def = unitDefs[unitTab];
+      let result;
+      if (unitTab === 'temp') {
+        let celsius;
+        if (fromIdx === 0) celsius = val;
+        else if (fromIdx === 1) celsius = (val - 32) * 5/9;
+        else celsius = val - 273.15;
+        if (toIdx === 0) result = celsius;
+        else if (toIdx === 1) result = celsius * 9/5 + 32;
+        else result = celsius + 273.15;
+      } else {
+        result = val * def.toBase[fromIdx] / def.toBase[toIdx];
+      }
+      let formatted;
+      if (Math.abs(result) >= 1000000) formatted = result.toExponential(4);
+      else if (Math.abs(result) < 0.0001 && result !== 0) formatted = result.toExponential(4);
+      else formatted = parseFloat(result.toFixed(6)).toString();
+      const fromUnit = def.units[fromIdx].split(' (')[0];
+      const toUnit   = def.units[toIdx].split(' (')[0];
+      document.getElementById('unit-output').textContent = val + ' ' + fromUnit + ' = ' + formatted + ' ' + toUnit;
+      document.getElementById('unit-result').style.display = 'block';
+    }
+    function clearUnits() {
+      if (document.getElementById('unit-input')) document.getElementById('unit-input').value = '';
+      document.getElementById('unit-result').style.display = 'none';
+    }
+    renderUnitFields();
+  </script>
+</body>
+</html>

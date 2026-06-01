@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image to PDF Converter — Free Online JPG PNG to PDF | ToolsNest</title>
+  <meta name="description" content="Convert JPG and PNG images to PDF online for free. Upload multiple images and download a single PDF file instantly. No signup required. Works entirely in your browser." />
+  <meta name="keywords" content="image to pdf, jpg to pdf, png to pdf, convert image to pdf online, multiple images to pdf, free pdf converter" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/image-to-pdf/" />
+
+  <meta property="og:title" content="Free Image to PDF Converter — JPG PNG to PDF Online | ToolsNest" />
+  <meta property="og:description" content="Convert JPG and PNG images to a single PDF file instantly. Upload multiple images, choose page size, and download your PDF. No signup, 100% free." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/image-to-pdf/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image to PDF Converter",
+    "description": "Free online tool to convert JPG and PNG images to a single PDF file. Supports multiple images and A4, Letter, A3 page sizes.",
+    "url": "https://toolsnestindia.netlify.app/tools/image-to-pdf/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "ToolsNest" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/">
+      <div class="logo-icon"><i class="ti ti-tools"></i></div>
+      <span class="logo-text">Tools<span>Nest</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+      <a href="/tools/passport-photo/">Passport Photo</a>
+      <a href="/tools/image-to-pdf/" class="active">Image to PDF</a>
+      <a href="/tools/bmi-calculator/">BMI</a>
+      <a href="/tools/cgpa-calculator/">CGPA</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <i class="ti ti-menu-2"></i>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/passport-photo/">🪪 Passport Photo</a>
+    <a href="/tools/image-to-pdf/">📄 Image to PDF</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+    <a href="/tools/password-generator/">🔒 Password Generator</a>
+    <a href="/tools/unit-converter/">📏 Unit Converter</a>
+  </div>
+
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <i class="ti ti-chevron-right"></i>
+        <span>Image to PDF</span>
+      </div>
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2>Image to PDF</h2>
+          <p>Upload one or more images and convert them into a single PDF file. Works in your browser — no upload to server.</p>
+        </div>
+
+        <div class="drop-zone" id="pdf-drop-zone" onclick="document.getElementById('pdf-img-input').click()" ondragover="event.preventDefault()" ondrop="pdfHandleDrop(event)">
+          <i class="ti ti-photo-up"></i>
+          <p>Click to upload images or drag &amp; drop</p>
+          <small>JPEG, PNG — multiple images supported</small>
+        </div>
+        <input type="file" id="pdf-img-input" accept="image/jpeg,image/png" multiple onchange="pdfLoadImages(event)" style="display:none;" />
+
+        <div id="pdf-preview-grid" style="display:none;margin-top:16px;">
+          <div id="pdf-thumbs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;"></div>
+          <div class="field-row" style="margin-bottom:12px;">
+            <span class="field-label">Page size</span>
+            <select id="pdf-size" style="flex:1;border:1px solid var(--border-strong);border-radius:var(--radius-xs);padding:8px 10px;font-size:13px;font-family:var(--font-body);outline:none;background:var(--surface);">
+              <option value="a4">A4 (210 × 297 mm)</option>
+              <option value="letter">Letter (216 × 279 mm)</option>
+              <option value="a3">A3 (297 × 420 mm)</option>
+            </select>
+          </div>
+          <div class="action-row">
+            <button class="action-btn primary" onclick="generatePDF()"><i class="ti ti-file-type-pdf"></i> Convert to PDF</button>
+            <button class="action-btn" onclick="clearPDFImages()"><i class="ti ti-trash"></i> Clear all</button>
+          </div>
+        </div>
+        <p id="pdf-status" style="margin-top:12px;font-size:13px;color:var(--text-secondary);"></p>
+      </div>
+
+      <div style="margin-top:32px;padding:24px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+        <h3 style="font-family:var(--font-head);font-size:15px;font-weight:600;margin-bottom:12px;">How it works</h3>
+        <ol style="padding-left:20px;font-size:13px;color:var(--text-secondary);line-height:2;">
+          <li>Click the upload area or drag &amp; drop your JPG or PNG images.</li>
+          <li>You can upload multiple images — each becomes a separate page in the PDF.</li>
+          <li>Choose the page size (A4, Letter, or A3).</li>
+          <li>Click <strong>Convert to PDF</strong> to download your PDF instantly.</li>
+        </ol>
+        <p style="margin-top:12px;font-size:13px;color:var(--text-muted);">🔒 All processing happens in your browser. Your images are never uploaded to any server.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="/" style="margin-bottom:0;">
+            <div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div>
+            <span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span>
+          </a>
+          <p>Free browser-based tools. No signup. No tracking.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4>Image Tools</h4>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/passport-photo/">Passport Photo</a>
+          <a href="/tools/image-to-pdf/">Image to PDF</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>More Tools</h4>
+          <a href="/tools/bmi-calculator/">BMI Calculator</a>
+          <a href="/tools/cgpa-calculator/">CGPA Calculator</a>
+          <a href="/tools/word-counter/">Word Counter</a>
+          <a href="/tools/password-generator/">Password Generator</a>
+          <a href="/tools/unit-converter/">Unit Converter</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Company</h4>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ToolsNest · All tools are free forever</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/about/">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let pdfImages = [];
+
+    function pdfHandleDrop(e) {
+      e.preventDefault();
+      const files = Array.from(e.dataTransfer.files).filter(f => f.type === 'image/jpeg' || f.type === 'image/png');
+      if (files.length) pdfAddImages(files);
+    }
+    function pdfLoadImages(e) { pdfAddImages(Array.from(e.target.files)); }
+    function pdfAddImages(files) {
+      const promises = Array.from(files).map(file => new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = ev => resolve(ev.target.result);
+        reader.readAsDataURL(file);
+      }));
+      Promise.all(promises).then(results => {
+        results.forEach(r => pdfImages.push(r));
+        pdfRenderThumbs();
+      });
+    }
+    function pdfRenderThumbs() {
+      const grid = document.getElementById('pdf-thumbs');
+      grid.innerHTML = '';
+      pdfImages.forEach((src, i) => {
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'position:relative;display:inline-block;';
+        const img = document.createElement('img');
+        img.src = src; img.style.cssText = 'width:80px;height:80px;object-fit:cover;border-radius:6px;border:1px solid var(--border-strong);';
+        const del = document.createElement('button');
+        del.innerHTML = '×'; del.title = 'Remove';
+        del.style.cssText = 'position:absolute;top:-6px;right:-6px;background:#EF4444;color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:12px;cursor:pointer;line-height:1;';
+        del.onclick = () => { pdfImages.splice(i, 1); pdfRenderThumbs(); };
+        wrap.appendChild(img); wrap.appendChild(del); grid.appendChild(wrap);
+      });
+      document.getElementById('pdf-preview-grid').style.display = pdfImages.length ? 'block' : 'none';
+      document.getElementById('pdf-status').textContent = pdfImages.length + ' image' + (pdfImages.length !== 1 ? 's' : '') + ' loaded';
+    }
+    function clearPDFImages() {
+      pdfImages = []; pdfRenderThumbs();
+      document.getElementById('pdf-img-input').value = '';
+      document.getElementById('pdf-status').textContent = '';
+    }
+    async function generatePDF() {
+      if (!pdfImages.length) { alert('Please upload at least one image.'); return; }
+      const btn = document.querySelector('.action-btn.primary');
+      const origLabel = btn.innerHTML;
+      btn.innerHTML = '<i class="ti ti-loader-2"></i> Generating...'; btn.disabled = true;
+      document.getElementById('pdf-status').textContent = 'Building your PDF...';
+
+      const sizeMap = { a4:[595.28,841.89], letter:[612,792], a3:[841.89,1190.55] };
+      const [PW, PH] = sizeMap[document.getElementById('pdf-size').value];
+      const enc = new TextEncoder();
+      const loadImg = src => new Promise(res => { const i = new Image(); i.onload = () => res(i); i.src = src; });
+      const b64ToBytes = b64 => Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+
+      const chunks = []; let byteLen = 0;
+      const push = str => { const b = enc.encode(str); chunks.push(b); byteLen += b.length; };
+      const pushRaw = bytes => { chunks.push(bytes); byteLen += bytes.length; };
+
+      push('%PDF-1.4\n');
+      const objOffsets = {};
+      let objN = 1;
+      const nextObj = () => { objN++; objOffsets[objN] = byteLen; return objN; };
+      const pageRefs = [];
+
+      for (let i = 0; i < pdfImages.length; i++) {
+        const img = await loadImg(pdfImages[i]);
+        const c = document.createElement('canvas');
+        c.width = img.naturalWidth; c.height = img.naturalHeight;
+        c.getContext('2d').drawImage(img, 0, 0);
+        const b64 = c.toDataURL('image/jpeg', 0.9).split(',')[1];
+        const jpegBytes = b64ToBytes(b64);
+        const iw = img.naturalWidth, ih = img.naturalHeight;
+        const margin = 20, scale = Math.min((PW - margin * 2) / iw, (PH - margin * 2) / ih, 1);
+        const dw = iw * scale, dh = ih * scale;
+        const dx = (PW - dw) / 2, dy = (PH - dh) / 2;
+        const imgRef = nextObj();
+        push(imgRef + ' 0 obj\n<</Type/XObject/Subtype/Image/Width ' + iw + '/Height ' + ih + '/ColorSpace/DeviceRGB/BitsPerComponent 8/Filter/DCTDecode/Length ' + jpegBytes.length + '>>\nstream\n');
+        pushRaw(jpegBytes);
+        push('\nendstream\nendobj\n');
+        const cs = 'q ' + dw.toFixed(2) + ' 0 0 ' + dh.toFixed(2) + ' ' + dx.toFixed(2) + ' ' + dy.toFixed(2) + ' cm /Im' + i + ' Do Q';
+        const csRef = nextObj();
+        push(csRef + ' 0 obj\n<</Length ' + cs.length + '>>\nstream\n' + cs + '\nendstream\nendobj\n');
+        const pgRef = nextObj();
+        pageRefs.push(pgRef);
+        push(pgRef + ' 0 obj\n<</Type/Page/Parent 1 0 R/MediaBox[0 0 ' + PW.toFixed(2) + ' ' + PH.toFixed(2) + ']/Contents ' + csRef + ' 0 R/Resources<</XObject<</Im' + i + ' ' + imgRef + ' 0 R>>>>>>\nendobj\n');
+      }
+
+      objOffsets[1] = byteLen;
+      push('1 0 obj\n<</Type/Pages/Kids[' + pageRefs.map(r => r + ' 0 R').join(' ') + '] /Count ' + pageRefs.length + '>>\nendobj\n');
+      objN++; objOffsets[objN] = byteLen;
+      const catN = objN;
+      push(catN + ' 0 obj\n<</Type/Catalog/Pages 1 0 R>>\nendobj\n');
+
+      const xrefOff = byteLen;
+      const allNums = Object.keys(objOffsets).map(Number).sort((a, b) => a - b);
+      const maxN = allNums[allNums.length - 1];
+      let xref = 'xref\n0 1\n0000000000 65535 f \n';
+      allNums.forEach(n => { xref += n + ' 1\n' + String(objOffsets[n]).padStart(10, '0') + ' 00000 n \n'; });
+      xref += 'trailer\n<</Size ' + (maxN + 1) + '/Root ' + catN + ' 0 R>>\nstartxref\n' + xrefOff + '\n%%EOF';
+      push(xref);
+
+      const total = chunks.reduce((s, c) => s + c.length, 0);
+      const pdf = new Uint8Array(total);
+      let pos = 0; for (const ch of chunks) { pdf.set(ch, pos); pos += ch.length; }
+      const blob = new Blob([pdf], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'toolsnest_images.pdf';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+
+      btn.innerHTML = origLabel; btn.disabled = false;
+      document.getElementById('pdf-status').textContent = '✅ PDF downloaded! Check your downloads folder.';
+    }
+  </script>
+</body>
+</html>

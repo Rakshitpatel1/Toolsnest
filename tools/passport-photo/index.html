@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Passport Photo Maker — Free Online India, US, UK ID Photo | ToolsNest</title>
+  <meta name="description" content="Free online passport photo maker. Crop and resize any photo to India passport (35×45mm), US passport (51×51mm), UK passport, PAN card, Aadhaar and visa photo sizes. Download instantly at 300 DPI." />
+  <meta name="keywords" content="passport photo maker, passport size photo online, india passport photo, us passport photo, pan card photo, aadhaar photo, id photo resize, crop passport photo" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/passport-photo/" />
+
+  <meta property="og:title" content="Free Passport Photo Maker — India, US, UK Sizes | ToolsNest" />
+  <meta property="og:description" content="Crop and resize any photo to standard passport and ID sizes. India passport, US passport, PAN card, Aadhaar and more. Download at 300 DPI, free." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/passport-photo/" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Passport Photo Maker",
+    "description": "Free online tool to crop and resize photos to standard passport and ID photo sizes. Supports India passport, US passport, UK passport, PAN card and Aadhaar.",
+    "url": "https://toolsnestindia.netlify.app/tools/passport-photo/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "publisher": { "@type": "Organization", "name": "ToolsNest" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="/">
+      <div class="logo-icon"><i class="ti ti-tools"></i></div>
+      <span class="logo-text">Tools<span>Nest</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+      <a href="/tools/image-to-pdf/">Image to PDF</a>
+      <a href="/tools/bmi-calculator/">BMI</a>
+      <a href="/tools/cgpa-calculator/">CGPA</a>
+      <a href="/tools/passport-photo/" class="active">Passport Photo</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+      <i class="ti ti-menu-2"></i>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/passport-photo/">🪪 Passport Photo</a>
+    <a href="/tools/image-to-pdf/">📄 Image to PDF</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+    <a href="/tools/case-converter/">Tt Case Converter</a>
+    <a href="/tools/word-counter/">№ Word Counter</a>
+    <a href="/tools/password-generator/">🔒 Password Generator</a>
+    <a href="/tools/unit-converter/">📏 Unit Converter</a>
+  </div>
+
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <i class="ti ti-chevron-right"></i>
+        <span>Passport Photo Maker</span>
+      </div>
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2>Passport Photo Maker</h2>
+          <p>Upload a photo, drag to position your face, then download the correctly sized passport photo.</p>
+        </div>
+
+        <div id="pp-upload-section">
+          <div class="drop-zone" onclick="document.getElementById('pp-input').click()">
+            <i class="ti ti-id-badge"></i>
+            <p>Click to upload your photo</p>
+            <small>JPEG or PNG — use a clear, front-facing photo</small>
+          </div>
+          <input type="file" id="pp-input" accept="image/jpeg,image/png" onchange="ppLoadImage(event)" style="display:none;" />
+        </div>
+
+        <div id="pp-editor-section" style="display:none;">
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;">
+            <div style="flex:1;min-width:200px;">
+              <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);display:block;margin-bottom:6px;">Photo Size</label>
+              <select id="pp-size" onchange="ppUpdatePreview()" style="width:100%;border:1px solid var(--border-strong);border-radius:var(--radius-xs);padding:9px 12px;font-size:13px;font-family:var(--font-body);outline:none;background:var(--surface);color:var(--text-primary);">
+                <option value="35x45">India Passport — 35×45 mm</option>
+                <option value="51x51">US Passport — 51×51 mm (2×2 in)</option>
+                <option value="45x45">UK Passport — 45×45 mm</option>
+                <option value="40x30">Visa Photo — 40×30 mm</option>
+                <option value="25x35">PAN Card — 25×35 mm</option>
+                <option value="30x40">Aadhaar / ID Card — 30×40 mm</option>
+              </select>
+            </div>
+            <div style="flex:1;min-width:200px;">
+              <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);display:block;margin-bottom:6px;">Background</label>
+              <select id="pp-bg" onchange="ppUpdatePreview()" style="width:100%;border:1px solid var(--border-strong);border-radius:var(--radius-xs);padding:9px 12px;font-size:13px;font-family:var(--font-body);outline:none;background:var(--surface);color:var(--text-primary);">
+                <option value="#ffffff">White</option>
+                <option value="#f0f4ff">Light Blue</option>
+                <option value="#f5f5f5">Light Grey</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+            <div style="flex:1;min-width:240px;">
+              <p style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;">Drag to reposition · Scroll to zoom</p>
+              <div id="pp-crop-container" style="position:relative;width:240px;height:300px;overflow:hidden;border:2px solid var(--brand);border-radius:var(--radius-sm);cursor:move;background:#f0f0f0;touch-action:none;">
+                <canvas id="pp-crop-canvas" style="position:absolute;top:0;left:0;"></canvas>
+                <div style="position:absolute;inset:0;pointer-events:none;">
+                  <div style="position:absolute;top:33.3%;left:0;right:0;height:1px;background:rgba(255,255,255,0.3);"></div>
+                  <div style="position:absolute;top:66.6%;left:0;right:0;height:1px;background:rgba(255,255,255,0.3);"></div>
+                  <div style="position:absolute;left:33.3%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.3);"></div>
+                  <div style="position:absolute;left:66.6%;top:0;bottom:0;width:1px;background:rgba(255,255,255,0.3);"></div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:10px;align-items:center;">
+                <span style="font-size:12px;color:var(--text-muted);">Zoom</span>
+                <input type="range" id="pp-zoom" min="5" max="300" value="100" oninput="ppUpdatePreview()" style="flex:1;" />
+                <span style="font-size:12px;color:var(--brand);font-weight:600;" id="pp-zoom-val">100%</span>
+              </div>
+            </div>
+            <div style="flex:1;min-width:160px;">
+              <p style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:8px;">Final Preview</p>
+              <canvas id="pp-preview-canvas" style="border:1px solid var(--border);border-radius:var(--radius-xs);display:block;max-width:100%;"></canvas>
+              <p id="pp-size-label" style="font-size:11px;color:var(--text-muted);margin-top:6px;"></p>
+            </div>
+          </div>
+
+          <div class="action-row" style="margin-top:18px;">
+            <button class="action-btn primary" onclick="ppDownload()"><i class="ti ti-download"></i> Download Photo</button>
+            <button class="action-btn" onclick="ppReset()"><i class="ti ti-upload"></i> Upload New Photo</button>
+          </div>
+          <p style="font-size:12px;color:var(--text-muted);margin-top:10px;">💡 Tip: Drag the image to center your face in the frame. Use zoom to fill the frame properly.</p>
+        </div>
+
+        <canvas id="pp-output-canvas" style="display:none;"></canvas>
+      </div>
+
+      <div style="margin-top:32px;padding:24px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+        <h3 style="font-family:var(--font-head);font-size:15px;font-weight:600;margin-bottom:12px;">Supported photo sizes</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;color:var(--text-primary);">India Passport</strong>
+            <span style="color:var(--text-muted);">35 × 45 mm</span>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;color:var(--text-primary);">US Passport</strong>
+            <span style="color:var(--text-muted);">51 × 51 mm (2×2 in)</span>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;color:var(--text-primary);">UK Passport</strong>
+            <span style="color:var(--text-muted);">45 × 45 mm</span>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;color:var(--text-primary);">PAN Card</strong>
+            <span style="color:var(--text-muted);">25 × 35 mm</span>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;color:var(--text-primary);">Aadhaar / ID</strong>
+            <span style="color:var(--text-muted);">30 × 40 mm</span>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;color:var(--text-primary);">Visa Photo</strong>
+            <span style="color:var(--text-muted);">40 × 30 mm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="/" style="margin-bottom:0;">
+            <div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div>
+            <span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span>
+          </a>
+          <p>Free browser-based tools. No signup. No tracking.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4>Image Tools</h4>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/passport-photo/">Passport Photo</a>
+          <a href="/tools/image-to-pdf/">Image to PDF</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>More Tools</h4>
+          <a href="/tools/bmi-calculator/">BMI Calculator</a>
+          <a href="/tools/cgpa-calculator/">CGPA Calculator</a>
+          <a href="/tools/word-counter/">Word Counter</a>
+          <a href="/tools/password-generator/">Password Generator</a>
+          <a href="/tools/unit-converter/">Unit Converter</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Company</h4>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ToolsNest · All tools are free forever</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy/">Privacy</a>
+          <a href="/about/">About</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let ppImg = null, ppDragX = 0, ppDragY = 0, ppStartX = 0, ppStartY = 0, ppDragging = false;
+    const PP_W = 240, PP_H = 300;
+
+    function ppLoadImage(e) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        ppImg = new Image();
+        ppImg.onload = () => {
+          document.getElementById('pp-zoom').value = 100;
+          document.getElementById('pp-zoom-val').textContent = '100%';
+          ppDragX = (PP_W - ppImg.width) / 2;
+          ppDragY = (PP_H - ppImg.height) / 2;
+          document.getElementById('pp-upload-section').style.display = 'none';
+          document.getElementById('pp-editor-section').style.display = 'block';
+          ppUpdatePreview();
+          ppSetupDrag();
+        };
+        ppImg.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function ppGetScale() { return parseInt(document.getElementById('pp-zoom').value) / 100; }
+
+    function ppUpdatePreview() {
+      if (!ppImg) return;
+      document.getElementById('pp-zoom-val').textContent = document.getElementById('pp-zoom').value + '%';
+      const scale = ppGetScale();
+      const bg = document.getElementById('pp-bg').value;
+      const cropCanvas = document.getElementById('pp-crop-canvas');
+      cropCanvas.width = PP_W; cropCanvas.height = PP_H;
+      cropCanvas.style.width = PP_W + 'px'; cropCanvas.style.height = PP_H + 'px';
+      const ctx = cropCanvas.getContext('2d');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, PP_W, PP_H);
+      ctx.drawImage(ppImg, ppDragX, ppDragY, ppImg.width * scale, ppImg.height * scale);
+      const sizeMap = { '35x45':[35,45],'51x51':[51,51],'45x45':[45,45],'40x30':[40,30],'25x35':[25,35],'30x40':[30,40] };
+      const [mmW, mmH] = sizeMap[document.getElementById('pp-size').value];
+      const DPI = 300, MM_TO_IN = 1/25.4;
+      const outW = Math.round(mmW * MM_TO_IN * DPI);
+      const outH = Math.round(mmH * MM_TO_IN * DPI);
+      const scaleX = outW / PP_W, scaleY = outH / PP_H;
+      const outCanvas = document.getElementById('pp-output-canvas');
+      outCanvas.width = outW; outCanvas.height = outH;
+      const octx = outCanvas.getContext('2d');
+      octx.fillStyle = bg; octx.fillRect(0, 0, outW, outH);
+      octx.drawImage(ppImg, ppDragX * scaleX, ppDragY * scaleY, ppImg.width * scale * scaleX, ppImg.height * scale * scaleY);
+      const maxPreviewW = 160;
+      const previewScale = Math.min(maxPreviewW / outW, 200 / outH);
+      const prevCanvas = document.getElementById('pp-preview-canvas');
+      prevCanvas.width = Math.round(outW * previewScale);
+      prevCanvas.height = Math.round(outH * previewScale);
+      prevCanvas.style.width = prevCanvas.width + 'px';
+      prevCanvas.style.height = prevCanvas.height + 'px';
+      prevCanvas.getContext('2d').drawImage(outCanvas, 0, 0, prevCanvas.width, prevCanvas.height);
+      document.getElementById('pp-size-label').textContent = mmW + '×' + mmH + ' mm · ' + outW + '×' + outH + 'px @ 300 DPI';
+    }
+
+    function ppSetupDrag() {
+      const container = document.getElementById('pp-crop-container');
+      const newContainer = container.cloneNode(true);
+      container.parentNode.replaceChild(newContainer, container);
+      const c = document.getElementById('pp-crop-container');
+      c.addEventListener('mousedown', e => { ppDragging = true; ppStartX = e.clientX - ppDragX; ppStartY = e.clientY - ppDragY; e.preventDefault(); });
+      document.addEventListener('mousemove', e => { if (!ppDragging) return; ppDragX = e.clientX - ppStartX; ppDragY = e.clientY - ppStartY; ppUpdatePreview(); });
+      document.addEventListener('mouseup', () => { ppDragging = false; });
+      c.addEventListener('touchstart', e => { ppDragging = true; ppStartX = e.touches[0].clientX - ppDragX; ppStartY = e.touches[0].clientY - ppDragY; e.preventDefault(); }, { passive: false });
+      c.addEventListener('touchmove', e => { if (!ppDragging) return; ppDragX = e.touches[0].clientX - ppStartX; ppDragY = e.touches[0].clientY - ppStartY; ppUpdatePreview(); e.preventDefault(); }, { passive: false });
+      c.addEventListener('touchend', () => { ppDragging = false; });
+      c.addEventListener('wheel', e => {
+        e.preventDefault();
+        const slider = document.getElementById('pp-zoom');
+        slider.value = Math.max(5, Math.min(300, parseInt(slider.value) - Math.sign(e.deltaY) * 5));
+        ppUpdatePreview();
+      }, { passive: false });
+    }
+
+    function ppDownload() {
+      if (!ppImg) return;
+      ppUpdatePreview();
+      const outCanvas = document.getElementById('pp-output-canvas');
+      const sizeVal = document.getElementById('pp-size').value;
+      const a = document.createElement('a');
+      a.href = outCanvas.toDataURL('image/jpeg', 0.95);
+      a.download = 'toolsnest_passport_' + sizeVal + 'mm.jpg';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+
+    function ppReset() {
+      ppImg = null; ppDragX = 0; ppDragY = 0; ppDragging = false;
+      document.getElementById('pp-upload-section').style.display = 'block';
+      document.getElementById('pp-editor-section').style.display = 'none';
+      document.getElementById('pp-input').value = '';
+    }
+  </script>
+</body>
+</html>

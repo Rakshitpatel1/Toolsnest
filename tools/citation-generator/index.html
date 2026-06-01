@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Citation Generator — Free APA MLA Chicago Reference Maker | ToolsNest</title>
+  <meta name="description" content="Free online citation generator. Create APA, MLA and Chicago style citations for books, websites and journal articles instantly. No signup required." />
+  <meta name="keywords" content="citation generator, apa citation generator, mla citation generator, chicago citation, reference generator, bibliography generator, cite website" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/citation-generator/" />
+  <meta property="og:title" content="Free Citation Generator — APA, MLA, Chicago | ToolsNest" />
+  <meta property="og:description" content="Generate APA, MLA and Chicago citations for books, websites and journals. Free, instant, no signup." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/citation-generator/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Citation Generator","description":"Free online citation generator supporting APA, MLA and Chicago styles for books, websites and journal articles.","url":"https://toolsnestindia.netlify.app/tools/citation-generator/","applicationCategory":"EducationApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+</head>
+<body>
+  <nav>
+    <a class="logo" href="/"><div class="logo-icon"><i class="ti ti-tools"></i></div><span class="logo-text">Tools<span>Nest</span></span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/cgpa-calculator/">CGPA</a>
+      <a href="/tools/bmi-calculator/">BMI</a>
+      <a href="/tools/citation-generator/" class="active">Citation</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/citation-generator/">📚 Citation Generator</a>
+    <a href="/tools/assignment-formatter/">📝 Assignment Formatter</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+  </div>
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb"><a href="/">Home</a><i class="ti ti-chevron-right"></i><span>Citation Generator</span></div>
+      <div class="panel-card">
+        <div class="panel-header"><h2>Citation Generator</h2><p>Fill in the details and get a formatted citation in APA, MLA, or Chicago style.</p></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+          <div class="toggle-row" style="margin-bottom:0;">
+            <button class="toggle-btn active" id="cit-style-apa" onclick="setCitStyle('apa')">APA</button>
+            <button class="toggle-btn" id="cit-style-mla" onclick="setCitStyle('mla')">MLA</button>
+            <button class="toggle-btn" id="cit-style-chicago" onclick="setCitStyle('chicago')">Chicago</button>
+          </div>
+          <div class="toggle-row" style="margin-bottom:0;">
+            <button class="toggle-btn active" id="cit-type-book" onclick="setCitType('book')">Book</button>
+            <button class="toggle-btn" id="cit-type-website" onclick="setCitType('website')">Website</button>
+            <button class="toggle-btn" id="cit-type-journal" onclick="setCitType('journal')">Journal</button>
+          </div>
+        </div>
+        <div id="cit-fields" style="display:flex;flex-direction:column;gap:10px;"></div>
+        <div class="action-row" style="margin-top:16px;">
+          <button class="action-btn primary" onclick="generateCitation()"><i class="ti ti-quote"></i> Generate Citation</button>
+          <button class="action-btn" onclick="clearCitation()"><i class="ti ti-trash"></i> Clear</button>
+        </div>
+        <div id="cit-output" style="display:none;margin-top:16px;">
+          <p style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text-muted);margin-bottom:8px;" id="cit-output-label">APA Citation</p>
+          <div class="result-box" id="cit-result" style="font-style:italic;color:var(--text-primary);"></div>
+          <div class="action-row" style="margin-top:10px;">
+            <button class="action-btn" onclick="copyCitation()"><i class="ti ti-copy"></i> Copy citation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand"><a class="logo" href="/" style="margin-bottom:0;"><div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div><span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span></a><p>Free browser-based tools. No signup. No tracking.</p></div>
+        <div class="footer-links-col"><h4>Student Tools</h4><a href="/tools/cgpa-calculator/">CGPA Calculator</a><a href="/tools/bmi-calculator/">BMI Calculator</a><a href="/tools/citation-generator/">Citation Generator</a><a href="/tools/assignment-formatter/">Assignment Formatter</a></div>
+        <div class="footer-links-col"><h4>Other Tools</h4><a href="/tools/compress-image/">Compress Image</a><a href="/tools/word-counter/">Word Counter</a><a href="/tools/password-generator/">Password Generator</a></div>
+        <div class="footer-links-col"><h4>Company</h4><a href="/about/">About</a><a href="/privacy/">Privacy Policy</a></div>
+      </div>
+      <div class="footer-bottom"><p>© 2025 ToolsNest · All tools are free forever</p><div class="footer-bottom-links"><a href="/privacy/">Privacy</a><a href="/about/">About</a></div></div>
+    </div>
+  </footer>
+  <script>
+    let citStyle = 'apa', citType = 'book';
+    const citFields = {
+      book: ['Author Last Name','Author First Name','Title of Book','Publisher','Year','City of Publication'],
+      website: ['Author Last Name','Author First Name','Page Title','Website Name','URL','Year','Access Date (e.g. 25 May 2025)'],
+      journal: ['Author Last Name','Author First Name','Article Title','Journal Name','Volume','Issue','Year','Pages (e.g. 12-25)','DOI (optional)']
+    };
+    function setCitStyle(s) {
+      citStyle = s;
+      ['apa','mla','chicago'].forEach(x => document.getElementById('cit-style-'+x).classList.toggle('active', x === s));
+    }
+    function setCitType(t) {
+      citType = t;
+      ['book','website','journal'].forEach(x => document.getElementById('cit-type-'+x).classList.toggle('active', x === t));
+      renderCitFields();
+    }
+    function renderCitFields() {
+      const container = document.getElementById('cit-fields');
+      container.innerHTML = '';
+      citFields[citType].forEach((label, i) => {
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'display:flex;flex-direction:column;gap:4px;';
+        const lbl = document.createElement('label');
+        lbl.style.cssText = 'font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;';
+        lbl.textContent = label;
+        const inp = document.createElement('input');
+        inp.type = 'text'; inp.id = 'cit-f-' + i; inp.placeholder = label;
+        inp.className = 'cc-textarea'; inp.style.cssText = 'min-height:unset;padding:10px 12px;';
+        wrap.appendChild(lbl); wrap.appendChild(inp); container.appendChild(wrap);
+      });
+      document.getElementById('cit-output').style.display = 'none';
+    }
+    function getF(i) { const el = document.getElementById('cit-f-' + i); return el ? el.value.trim() : ''; }
+    function generateCitation() {
+      const f = citFields[citType].map((_, i) => getF(i));
+      let cit = '';
+      const lastName=f[0]||'', firstName=f[1]||'', title=f[2]||'', pub=f[3]||'', yearOrUrl=f[4]||'', extra=f[5]||'';
+      if (citType === 'book') {
+        if (citStyle === 'apa') cit = (lastName?lastName+', ':'')+(firstName?firstName[0]+'. ':'')+(yearOrUrl?'('+yearOrUrl+'). ':'')+(title?'<em>'+title+'</em>. ':'')+(extra?extra+': ':'')+pub+'.';
+        else cit = (lastName?lastName+', ':'')+(firstName?firstName+'. ':'')+(title?'<em>'+title+'</em>. ':'')+(extra?extra+': ':'')+pub+(yearOrUrl?', '+yearOrUrl:'.')+'.';
+      } else if (citType === 'website') {
+        const url=f[4]||'', year=f[5]||'', accessed=f[6]||'';
+        if (citStyle === 'apa') cit = (lastName?lastName+', ':'')+(firstName?firstName[0]+'. ':'')+(year?'('+year+'). ':'')+title+'. '+(pub?'<em>'+pub+'</em>. ':'')+url;
+        else cit = (lastName?lastName+', ':'')+(firstName?firstName+'. ':'')+(title?'"'+title+'." ':'')+('<em>'+pub+'</em>, ')+year+(accessed?'. Accessed '+accessed:'.')+'. '+url;
+      } else {
+        const jName=f[3]||'', vol=f[4]||'', issue=f[5]||'', year=f[6]||'', pages=f[7]||'', doi=f[8]||'';
+        if (citStyle === 'apa') cit = (lastName?lastName+', ':'')+(firstName?firstName[0]+'. ':'')+(year?'('+year+'). ':'')+title+'. '+(jName?'<em>'+jName+'</em>':'')+(vol?', <em>'+vol+'</em>':'')+(issue?'('+issue+')':'')+(pages?', '+pages+'.':(doi?'':'.'))+(doi?' https://doi.org/'+doi:'');
+        else cit = (lastName?lastName+', ':'')+(firstName?firstName+'. ':'')+(title?'"'+title+'." ':'')+('<em>'+jName+'</em>, ')+(vol?'vol. '+vol+', ':'')+('no. '+issue+', ')+year+(pages?', pp. '+pages:'.')+'.';
+      }
+      document.getElementById('cit-result').innerHTML = cit || 'Please fill in at least some fields.';
+      document.getElementById('cit-output-label').textContent = citStyle.toUpperCase() + ' Citation (' + citType.charAt(0).toUpperCase() + citType.slice(1) + ')';
+      document.getElementById('cit-output').style.display = 'block';
+    }
+    function clearCitation() { document.querySelectorAll('#cit-fields input').forEach(i => i.value = ''); document.getElementById('cit-output').style.display = 'none'; }
+    function copyCitation() {
+      const txt = document.getElementById('cit-result').innerText;
+      navigator.clipboard.writeText(txt).then(() => {
+        const btn = document.querySelector('#cit-output .action-btn');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<i class="ti ti-check"></i> Copied!';
+        btn.style.background = '#10B981'; btn.style.color = '#fff'; btn.style.borderColor = '#10B981';
+        setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; btn.style.color = ''; btn.style.borderColor = ''; }, 1600);
+      });
+    }
+    renderCitFields();
+  </script>
+</body>
+</html>
