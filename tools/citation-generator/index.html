@@ -14,6 +14,11 @@
   <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/citation-generator/" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Citation Generator","description":"Free online citation generator supporting APA, MLA and Chicago styles for books, websites and journal articles.","url":"https://toolsnestindia.netlify.app/tools/citation-generator/","applicationCategory":"EducationApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#2563EB" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="ToolsNest" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
@@ -150,5 +155,6 @@
     }
     renderCitFields();
   </script>
+  <script>if("serviceWorker"in navigator)navigator.serviceWorker.register("/sw.js");</script>
 </body>
 </html>

@@ -1,0 +1,42 @@
+{
+  "name": "ToolsNest — Free Online Tools",
+  "short_name": "ToolsNest",
+  "description": "Free online tools — image compressor, passport photo maker, BMI calculator, CGPA calculator and more. No signup, works offline.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563EB",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Compress Image",
+      "url": "/tools/compress-image/",
+      "description": "Reduce JPEG/PNG file size"
+    },
+    {
+      "name": "Passport Photo",
+      "url": "/tools/passport-photo/",
+      "description": "Resize photo to passport size"
+    },
+    {
+      "name": "BMI Calculator",
+      "url": "/tools/bmi-calculator/",
+      "description": "Calculate Body Mass Index"
+    },
+    {
+      "name": "CGPA Calculator",
+      "url": "/tools/cgpa-calculator/",
+      "description": "Calculate your CGPA"
+    }
+  ]
+}
