@@ -1,20 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <!-- Full blue background (fills the entire shape for maskable icons) -->
+  <!-- Full bleed blue background (OS applies shape mask) -->
   <rect width="512" height="512" fill="#2563EB"/>
 
-  <!-- Wrench icon — white, centered in safe zone -->
-  <g fill="white">
-    <!-- Handle: diagonal pill shape -->
-    <rect x="88" y="228" width="288" height="72" rx="36"
-          transform="rotate(-45 232 264)"/>
+  <!-- WRENCH — rotated -45° (bottom-left to top-right) -->
+  <g transform="rotate(-45 256 256)">
+    <!-- Handle -->
+    <rect x="76" y="230" width="208" height="52" rx="26" fill="white"/>
+    <!-- Head ring -->
+    <circle cx="352" cy="256" r="78" fill="white"/>
+    <circle cx="352" cy="256" r="40" fill="#2563EB"/>
+    <!-- Jaw opening -->
+    <rect x="312" y="178" width="80" height="62" fill="#2563EB"/>
+  </g>
 
-    <!-- Head: large circle -->
-    <circle cx="344" cy="168" r="108"/>
-
-    <!-- Inner hollow to make ring -->
-    <circle cx="344" cy="168" r="54" fill="#2563EB"/>
-
-    <!-- Jaw opening at top of head -->
-    <rect x="294" y="60" width="100" height="90" fill="#2563EB"/>
+  <!-- PENCIL — rotated +45° (top-left to bottom-right) -->
+  <g transform="rotate(45 256 256)">
+    <!-- Body -->
+    <rect x="110" y="230" width="220" height="52" rx="8" fill="white"/>
+    <!-- Tip -->
+    <polygon points="330,228 330,284 396,256" fill="white"/>
+    <!-- Tip point (dark) -->
+    <polygon points="370,243 370,269 396,256" fill="#1D4ED8"/>
+    <!-- Eraser -->
+    <rect x="86" y="226" width="32" height="60" rx="10" fill="#93C5FD"/>
   </g>
 </svg>
