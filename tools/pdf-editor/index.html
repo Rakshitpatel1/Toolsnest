@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PDF Editor — Remove Pages, Split & Merge PDF Free Online | ToolsNest</title>
+  <meta name="description" content="Free online PDF editor. Remove pages from PDF, split PDF into parts, merge multiple PDFs and add images to any page. Works entirely in your browser — no upload to server, 100% private." />
+  <meta name="keywords" content="pdf editor online free, remove pages from pdf, split pdf online, merge pdf free, pdf page remover, edit pdf online" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://toolsnestindia.netlify.app/tools/pdf-editor/" />
+  <meta property="og:title" content="Free PDF Editor — Remove Pages, Split & Merge Online | ToolsNest" />
+  <meta property="og:description" content="Remove pages, split and merge PDFs entirely in your browser. Free, no signup, 100% private." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://toolsnestindia.netlify.app/tools/pdf-editor/" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PDF Editor","description":"Free online PDF editor. Remove pages, split, merge PDFs and add images. Works in browser, no server upload.","url":"https://toolsnestindia.netlify.app/tools/pdf-editor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#2563EB" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="ToolsNest" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <link rel="stylesheet" href="/css/shared.css" />
+
+  <!-- PDF libraries (loaded from CDN, processed entirely in browser) -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <style>
+    .pdf-tabs { display:flex; border-bottom:1px solid var(--border); margin-bottom:24px; gap:0; overflow-x:auto; }
+    .pdf-tab {
+      padding:10px 16px; font-size:13px; font-family:var(--font-body); font-weight:500;
+      cursor:pointer; border:none; background:none; color:var(--text-secondary);
+      border-bottom:2px solid transparent; margin-bottom:-1px; transition:all 0.15s;
+      white-space:nowrap; display:flex; align-items:center; gap:6px;
+    }
+    .pdf-tab:hover { color:var(--text-primary); }
+    .pdf-tab.active { color:var(--brand); border-bottom-color:var(--brand); }
+
+    .page-grid { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; min-height:40px; }
+    .page-thumb {
+      position:relative; border:2px solid var(--border-strong); border-radius:var(--radius-sm);
+      cursor:pointer; transition:all 0.15s; background:#f5f5f5; overflow:hidden; user-select:none;
+    }
+    .page-thumb:hover { border-color:var(--brand-mid); box-shadow:0 2px 8px rgba(37,99,235,0.1); }
+    .page-thumb.selected { border-color:var(--brand); box-shadow:0 0 0 3px rgba(37,99,235,0.15); }
+    .page-thumb canvas { display:block; }
+    .page-num { text-align:center; font-size:11px; color:var(--text-muted); padding:4px 0 5px; font-weight:500; background:#fff; border-top:1px solid var(--border); }
+    .page-check {
+      position:absolute; top:5px; right:5px; width:20px; height:20px;
+      background:var(--brand); border-radius:50%; display:none;
+      align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:700;
+    }
+    .page-thumb.selected .page-check { display:flex; }
+
+    .pdf-info-bar {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm);
+      padding:10px 14px; font-size:13px; color:var(--text-secondary);
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+      gap:8px; margin-bottom:20px;
+    }
+
+    .merge-list { display:flex; flex-direction:column; gap:8px; margin:12px 0; }
+    .merge-item {
+      display:flex; align-items:center; gap:10px; padding:10px 14px;
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-sm);
+      font-size:13px;
+    }
+    .merge-item span { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .merge-del { background:none; border:none; cursor:pointer; color:var(--text-muted); font-size:18px; padding:2px 4px; line-height:1; }
+    .merge-del:hover { color:#EF4444; }
+
+    .loading-overlay {
+      position:fixed; inset:0; background:rgba(255,255,255,0.88);
+      display:none; flex-direction:column; align-items:center; justify-content:center;
+      z-index:9999; font-size:14px; color:var(--text-secondary); gap:14px;
+    }
+    .spinner { width:36px; height:36px; border:3px solid var(--border); border-top-color:var(--brand); border-radius:50%; animation:spin 0.8s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    .status-msg { margin-top:12px; font-size:13px; color:var(--text-secondary); min-height:20px; }
+
+    @media (max-width:700px) {
+      .pdf-tab { padding:8px 10px; font-size:12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="spinner"></div>
+    <span id="loading-msg">Processing...</span>
+  </div>
+
+  <nav>
+    <a class="logo" href="/"><div class="logo-icon"><i class="ti ti-tools"></i></div><span class="logo-text">Tools<span>Nest</span></span></a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/tools/compress-image/">Compress Image</a>
+      <a href="/tools/image-to-pdf/">Image to PDF</a>
+      <a href="/tools/pdf-editor/" class="active">PDF Editor</a>
+      <a href="/tools/passport-photo/">Passport Photo</a>
+    </div>
+    <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu"><i class="ti ti-menu-2"></i></button>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">🏠 Home</a>
+    <a href="/tools/pdf-editor/">📝 PDF Editor</a>
+    <a href="/tools/image-to-pdf/">📄 Image to PDF</a>
+    <a href="/tools/compress-image/">📷 Compress Image</a>
+    <a href="/tools/passport-photo/">🪪 Passport Photo</a>
+    <a href="/tools/bmi-calculator/">⚖️ BMI Calculator</a>
+    <a href="/tools/cgpa-calculator/">🎓 CGPA Calculator</a>
+  </div>
+
+  <main class="tool-page-main">
+    <div class="panel-wrap">
+      <a class="back-btn" href="/"><i class="ti ti-arrow-left"></i> Back to Home</a>
+      <div class="breadcrumb"><a href="/">Home</a><i class="ti ti-chevron-right"></i><span>PDF Editor</span></div>
+
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2>PDF Editor</h2>
+          <p>Remove pages, split, merge and add images to your PDF. 100% private — processed in your browser.</p>
+        </div>
+
+        <!-- ── UPLOAD ── -->
+        <div id="upload-section">
+          <div class="drop-zone" id="drop-zone"
+               onclick="document.getElementById('pdf-input').click()"
+               ondragover="event.preventDefault();this.classList.add('drag-over')"
+               ondragleave="this.classList.remove('drag-over')"
+               ondrop="handleDrop(event)">
+            <i class="ti ti-file-type-pdf"></i>
+            <p>Click to upload or drag &amp; drop a PDF</p>
+            <small>PDF files only · Processed entirely in your browser</small>
+          </div>
+          <input type="file" id="pdf-input" accept="application/pdf" onchange="loadPDFFile(event.target.files[0])" style="display:none;" />
+        </div>
+
+        <!-- ── EDITOR ── -->
+        <div id="editor-section" style="display:none;">
+
+          <div class="pdf-info-bar">
+            <span><i class="ti ti-file-type-pdf" style="color:var(--brand);"></i> &nbsp;<strong id="pdf-filename">file.pdf</strong></span>
+            <span id="pdf-page-count" style="color:var(--text-muted);"></span>
+            <button class="action-btn" onclick="resetTool()" style="padding:5px 12px;font-size:12px;">
+              <i class="ti ti-upload"></i> Load new PDF
+            </button>
+          </div>
+
+          <!-- Tabs -->
+          <div class="pdf-tabs">
+            <button class="pdf-tab active" onclick="setTab('organize')"><i class="ti ti-layout-grid"></i> Organize</button>
+            <button class="pdf-tab" onclick="setTab('split')"><i class="ti ti-scissors"></i> Split</button>
+            <button class="pdf-tab" onclick="setTab('merge')"><i class="ti ti-copy-plus"></i> Merge</button>
+            <button class="pdf-tab" onclick="setTab('add-image')"><i class="ti ti-photo-plus"></i> Add Image</button>
+          </div>
+
+          <!-- ── ORGANIZE TAB ── -->
+          <div id="tab-organize">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px;">
+              <p style="font-size:13px;color:var(--text-secondary);">Click pages to select, then remove them.</p>
+              <div style="display:flex;gap:6px;">
+                <button class="action-btn" onclick="selectAll()" style="padding:6px 12px;font-size:12px;"><i class="ti ti-check"></i> All</button>
+                <button class="action-btn" onclick="clearSel()" style="padding:6px 12px;font-size:12px;"><i class="ti ti-x"></i> Clear</button>
+              </div>
+            </div>
+            <div class="page-grid" id="page-grid"></div>
+            <div class="action-row">
+              <button class="action-btn primary" id="del-btn" onclick="deleteSelected()" disabled>
+                <i class="ti ti-trash"></i> Remove <span id="sel-count">0</span> selected
+              </button>
+              <button class="action-btn" onclick="downloadPdf(currentPdfBytes, 'edited')">
+                <i class="ti ti-download"></i> Download PDF
+              </button>
+            </div>
+          </div>
+
+          <!-- ── SPLIT TAB ── -->
+          <div id="tab-split" style="display:none;">
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">Extract a range of pages into a new PDF. Your original is unchanged.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px;">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">From page</label>
+                <input type="number" id="split-from" min="1" value="1" class="cc-textarea" style="min-height:unset;padding:10px 12px;" />
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">To page</label>
+                <input type="number" id="split-to" min="1" value="1" class="cc-textarea" style="min-height:unset;padding:10px 12px;" />
+              </div>
+            </div>
+            <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Total pages in current PDF: <strong id="split-total">—</strong></p>
+            <div class="action-row">
+              <button class="action-btn primary" onclick="splitPdf()"><i class="ti ti-scissors"></i> Extract &amp; Download</button>
+            </div>
+            <div class="status-msg" id="split-status"></div>
+          </div>
+
+          <!-- ── MERGE TAB ── -->
+          <div id="tab-merge" style="display:none;">
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;">Add more PDFs to merge with your current file. Combined in the order listed.</p>
+            <div class="drop-zone" onclick="document.getElementById('merge-input').click()" style="padding:28px 20px;">
+              <i class="ti ti-file-plus"></i>
+              <p>Click to add more PDFs</p>
+              <small>Multiple files supported</small>
+            </div>
+            <input type="file" id="merge-input" accept="application/pdf" multiple onchange="addMergeFiles(event)" style="display:none;" />
+            <div class="merge-list" id="merge-list"></div>
+            <div class="action-row">
+              <button class="action-btn primary" onclick="mergePdfs()"><i class="ti ti-copy-plus"></i> Merge all &amp; Download</button>
+            </div>
+            <div class="status-msg" id="merge-status"></div>
+          </div>
+
+          <!-- ── ADD IMAGE TAB ── -->
+          <div id="tab-add-image" style="display:none;">
+            <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">Overlay an image onto any page of your PDF.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Page number</label>
+                <input type="number" id="ai-page" min="1" value="1" class="cc-textarea" style="min-height:unset;padding:10px 12px;" />
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Image width (% of page)</label>
+                <input type="number" id="ai-size" min="5" max="100" value="50" class="cc-textarea" style="min-height:unset;padding:10px 12px;" />
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">X position (% from left)</label>
+                <input type="number" id="ai-x" min="0" max="95" value="25" class="cc-textarea" style="min-height:unset;padding:10px 12px;" />
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;">Y position (% from bottom)</label>
+                <input type="number" id="ai-y" min="0" max="95" value="25" class="cc-textarea" style="min-height:unset;padding:10px 12px;" />
+              </div>
+            </div>
+            <div class="drop-zone" onclick="document.getElementById('ai-input').click()" style="padding:28px 20px;">
+              <i class="ti ti-photo-plus"></i>
+              <p id="ai-drop-text">Click to upload image (JPEG or PNG)</p>
+              <small>Image will be placed on the selected page</small>
+            </div>
+            <input type="file" id="ai-input" accept="image/jpeg,image/png" onchange="pickImage(event)" style="display:none;" />
+            <div class="action-row" style="margin-top:16px;">
+              <button class="action-btn primary" id="ai-btn" onclick="addImageToPdf()" disabled>
+                <i class="ti ti-photo-plus"></i> Add image &amp; Download
+              </button>
+            </div>
+            <div class="status-msg" id="ai-status"></div>
+          </div>
+
+        </div><!-- /editor-section -->
+      </div><!-- /panel-card -->
+
+      <!-- Info block -->
+      <div style="margin-top:32px;padding:24px;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);">
+        <h3 style="font-family:var(--font-head);font-size:15px;font-weight:600;margin-bottom:14px;">What you can do</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-bottom:14px;">
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;margin-bottom:4px;">🗑️ Remove Pages</strong>
+            <span style="color:var(--text-muted);">Click to select pages, then delete them</span>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;margin-bottom:4px;">✂️ Split PDF</strong>
+            <span style="color:var(--text-muted);">Extract any page range into a new file</span>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;margin-bottom:4px;">📎 Merge PDFs</strong>
+            <span style="color:var(--text-muted);">Combine multiple PDF files into one</span>
+          </div>
+          <div style="background:#fff;border:1px solid var(--border-strong);border-radius:var(--radius-sm);padding:12px;font-size:13px;">
+            <strong style="display:block;margin-bottom:4px;">🖼️ Add Image</strong>
+            <span style="color:var(--text-muted);">Overlay a JPEG/PNG onto any page</span>
+          </div>
+        </div>
+        <p style="font-size:13px;color:var(--text-muted);">🔒 Your PDF never leaves your device. Everything runs in the browser using pdf-lib and PDF.js.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="logo" href="/" style="margin-bottom:0;">
+            <div class="logo-icon" style="width:24px;height:24px;font-size:12px;"><i class="ti ti-tools"></i></div>
+            <span class="logo-text" style="font-size:15px;">Tools<span>Nest</span></span>
+          </a>
+          <p>Free browser-based tools. No signup. No tracking.</p>
+        </div>
+        <div class="footer-links-col">
+          <h4>PDF Tools</h4>
+          <a href="/tools/pdf-editor/">PDF Editor</a>
+          <a href="/tools/image-to-pdf/">Image to PDF</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Image Tools</h4>
+          <a href="/tools/compress-image/">Compress Image</a>
+          <a href="/tools/passport-photo/">Passport Photo</a>
+        </div>
+        <div class="footer-links-col">
+          <h4>Company</h4>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 ToolsNest · All tools are free forever</p>
+        <div class="footer-bottom-links"><a href="/privacy/">Privacy</a><a href="/about/">About</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── PDF.js worker ──
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    // ── State ──
+    let pdfBytes    = null;   // current PDF as Uint8Array
+    let pdfJsDoc    = null;   // PDF.js doc for previews
+    let totalPages  = 0;
+    let selectedPgs = new Set();
+    let filename    = 'document.pdf';
+    let mergeFiles  = [];     // [{name, bytes}]
+    let imgBytes    = null;
+    let imgType     = 'jpeg';
+
+    // ── Loading ──
+    const showLoad = msg => {
+      document.getElementById('loading-msg').textContent = msg || 'Processing...';
+      document.getElementById('loading-overlay').style.display = 'flex';
+    };
+    const hideLoad = () => { document.getElementById('loading-overlay').style.display = 'none'; };
+
+    // ── Tabs ──
+    function setTab(name) {
+      ['organize','split','merge','add-image'].forEach(t =>
+        document.getElementById('tab-' + t).style.display = t === name ? '' : 'none'
+      );
+      document.querySelectorAll('.pdf-tab').forEach((btn, i) =>
+        btn.classList.toggle('active', ['organize','split','merge','add-image'][i] === name)
+      );
+    }
+
+    // ── Drop ──
+    function handleDrop(e) {
+      e.preventDefault();
+      document.getElementById('drop-zone').classList.remove('drag-over');
+      const f = e.dataTransfer.files[0];
+      if (f && f.type === 'application/pdf') loadPDFFile(f);
+    }
+
+    // ── Load PDF ──
+    async function loadPDFFile(file) {
+      showLoad('Loading PDF…');
+      try {
+        filename = file.name;
+        const buf = await file.arrayBuffer();
+        pdfBytes = new Uint8Array(buf);
+        await reloadViewer();
+        mergeFiles = [];
+        renderMergeList();
+        document.getElementById('pdf-filename').textContent = filename;
+        document.getElementById('upload-section').style.display = 'none';
+        document.getElementById('editor-section').style.display = 'block';
+        selectedPgs.clear();
+        updateSelUI();
+        await renderThumbs();
+      } catch(e) {
+        alert('Could not open this PDF. It may be encrypted or corrupted.');
+        console.error(e);
+      }
+      hideLoad();
+    }
+
+    async function reloadViewer() {
+      pdfJsDoc   = await pdfjsLib.getDocument({ data: pdfBytes.slice() }).promise;
+      totalPages  = pdfJsDoc.numPages;
+      document.getElementById('pdf-page-count').textContent = totalPages + ' page' + (totalPages !== 1 ? 's' : '');
+      document.getElementById('split-to').value  = totalPages;
+      document.getElementById('split-total').textContent = totalPages;
+      const aiPage = document.getElementById('ai-page');
+      aiPage.max = totalPages;
+      if (parseInt(aiPage.value) > totalPages) aiPage.value = 1;
+    }
+
+    // ── Thumbnails ──
+    async function renderThumbs() {
+      const grid = document.getElementById('page-grid');
+      grid.innerHTML = '';
+      for (let i = 1; i <= totalPages; i++) {
+        const wrap = document.createElement('div');
+        wrap.className = 'page-thumb';
+        wrap.dataset.idx = i - 1;
+        wrap.onclick = () => togglePg(i - 1);
+
+        const canvas = document.createElement('canvas');
+        const label  = document.createElement('div');
+        label.className = 'page-num';
+        label.textContent = 'Page ' + i;
+
+        const check = document.createElement('div');
+        check.className = 'page-check';
+        check.textContent = '✓';
+
+        wrap.appendChild(canvas);
+        wrap.appendChild(label);
+        wrap.appendChild(check);
+        grid.appendChild(wrap);
+
+        // Render async — progressive display
+        renderOnePage(i, canvas);
+      }
+    }
+
+    async function renderOnePage(pageNum, canvas) {
+      try {
+        const page = await pdfJsDoc.getPage(pageNum);
+        const nv   = page.getViewport({ scale: 1 });
+        const scale = 150 / nv.width;
+        const vp   = page.getViewport({ scale });
+        canvas.width  = vp.width;
+        canvas.height = vp.height;
+        await page.render({ canvasContext: canvas.getContext('2d'), viewport: vp }).promise;
+      } catch(e) { /* silent */ }
+    }
+
+    // ── Selection ──
+    function togglePg(idx) {
+      selectedPgs.has(idx) ? selectedPgs.delete(idx) : selectedPgs.add(idx);
+      updateSelUI();
+    }
+    function selectAll() { for (let i = 0; i < totalPages; i++) selectedPgs.add(i); updateSelUI(); }
+    function clearSel()  { selectedPgs.clear(); updateSelUI(); }
+
+    function updateSelUI() {
+      document.querySelectorAll('.page-thumb').forEach(el =>
+        el.classList.toggle('selected', selectedPgs.has(parseInt(el.dataset.idx)))
+      );
+      const n = selectedPgs.size;
+      document.getElementById('sel-count').textContent = n;
+      document.getElementById('del-btn').disabled = n === 0 || n === totalPages;
+    }
+
+    // ── Delete pages ──
+    async function deleteSelected() {
+      if (!selectedPgs.size || selectedPgs.size === totalPages) return;
+      showLoad('Removing pages…');
+      try {
+        const doc = await PDFLib.PDFDocument.load(pdfBytes);
+        Array.from(selectedPgs).sort((a,b) => b - a).forEach(i => doc.removePage(i));
+        pdfBytes = await doc.save();
+        selectedPgs.clear();
+        await reloadViewer();
+        await renderThumbs();
+        updateSelUI();
+      } catch(e) { alert('Error removing pages.'); console.error(e); }
+      hideLoad();
+    }
+
+    // ── Download helper ──
+    function downloadPdf(bytes, suffix) {
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = 'toolsnest_' + filename.replace(/\.pdf$/i, '') + '_' + suffix + '.pdf';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+    }
+
+    // ── Split ──
+    async function splitPdf() {
+      const from = parseInt(document.getElementById('split-from').value);
+      const to   = parseInt(document.getElementById('split-to').value);
+      if (!from || !to || from < 1 || to > totalPages || from > to) {
+        alert('Enter a valid range (1 – ' + totalPages + ').'); return;
+      }
+      showLoad('Splitting PDF…');
+      try {
+        const src  = await PDFLib.PDFDocument.load(pdfBytes);
+        const out  = await PDFLib.PDFDocument.create();
+        const idxs = [];
+        for (let i = from - 1; i < to; i++) idxs.push(i);
+        const pages = await out.copyPages(src, idxs);
+        pages.forEach(p => out.addPage(p));
+        const bytes = await out.save();
+        downloadPdf(bytes, 'pages' + from + '-' + to);
+        document.getElementById('split-status').textContent = '✅ Downloaded! Pages ' + from + '–' + to + ' extracted.';
+      } catch(e) { alert('Error splitting PDF.'); console.error(e); }
+      hideLoad();
+    }
+
+    // ── Merge ──
+    function addMergeFiles(e) {
+      Array.from(e.target.files).forEach(file => {
+        if (file.type !== 'application/pdf') return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+          mergeFiles.push({ name: file.name, bytes: new Uint8Array(ev.target.result) });
+          renderMergeList();
+        };
+        reader.readAsArrayBuffer(file);
+      });
+      e.target.value = '';
+    }
+
+    function renderMergeList() {
+      const list = document.getElementById('merge-list');
+      list.innerHTML = '';
+      // Current PDF (always first)
+      const cur = document.createElement('div');
+      cur.className = 'merge-item';
+      cur.innerHTML = `<i class="ti ti-file-type-pdf" style="color:var(--brand);font-size:16px;flex-shrink:0;"></i><span><strong>Current:</strong> ${filename}</span>`;
+      list.appendChild(cur);
+      mergeFiles.forEach((f, i) => {
+        const item = document.createElement('div');
+        item.className = 'merge-item';
+        item.innerHTML = `<i class="ti ti-file-type-pdf" style="color:var(--text-muted);font-size:16px;flex-shrink:0;"></i><span>${f.name}</span><button class="merge-del" onclick="mergeFiles.splice(${i},1);renderMergeList()"><i class="ti ti-x"></i></button>`;
+        list.appendChild(item);
+      });
+    }
+
+    async function mergePdfs() {
+      if (!mergeFiles.length) { alert('Add at least one more PDF to merge.'); return; }
+      showLoad('Merging PDFs…');
+      try {
+        const out = await PDFLib.PDFDocument.create();
+        // Current PDF
+        const curDoc = await PDFLib.PDFDocument.load(pdfBytes);
+        const curPages = await out.copyPages(curDoc, curDoc.getPageIndices());
+        curPages.forEach(p => out.addPage(p));
+        // Additional files
+        for (const f of mergeFiles) {
+          const doc = await PDFLib.PDFDocument.load(f.bytes);
+          const pages = await out.copyPages(doc, doc.getPageIndices());
+          pages.forEach(p => out.addPage(p));
+        }
+        const bytes = await out.save();
+        downloadPdf(bytes, 'merged');
+        document.getElementById('merge-status').textContent =
+          '✅ Merged! ' + (mergeFiles.length + 1) + ' PDFs combined.';
+      } catch(e) { alert('Error merging. Make sure all files are valid PDFs.'); console.error(e); }
+      hideLoad();
+    }
+
+    // ── Add Image ──
+    function pickImage(e) {
+      const file = e.target.files[0]; if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        imgBytes = new Uint8Array(ev.target.result);
+        imgType  = file.type === 'image/png' ? 'png' : 'jpeg';
+        document.getElementById('ai-drop-text').textContent = '✅ ' + file.name;
+        document.getElementById('ai-btn').disabled = false;
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    async function addImageToPdf() {
+      if (!imgBytes) { alert('Please select an image first.'); return; }
+      const pageNum  = parseInt(document.getElementById('ai-page').value);
+      const sizePct  = parseInt(document.getElementById('ai-size').value) / 100;
+      const xPct     = parseInt(document.getElementById('ai-x').value) / 100;
+      const yPct     = parseInt(document.getElementById('ai-y').value) / 100;
+      if (!pageNum || pageNum < 1 || pageNum > totalPages) {
+        alert('Enter a valid page number (1 – ' + totalPages + ').'); return;
+      }
+      showLoad('Adding image…');
+      try {
+        const doc  = await PDFLib.PDFDocument.load(pdfBytes);
+        const page = doc.getPages()[pageNum - 1];
+        const { width: pw, height: ph } = page.getSize();
+        const img  = imgType === 'png'
+          ? await doc.embedPng(imgBytes)
+          : await doc.embedJpg(imgBytes);
+        const iw = pw * sizePct;
+        const ih = (img.height / img.width) * iw;
+        page.drawImage(img, { x: pw * xPct, y: ph * yPct, width: iw, height: ih });
+        const bytes = await doc.save();
+        // Update in-memory PDF and refresh thumbnails
+        pdfBytes = bytes;
+        await reloadViewer();
+        await renderThumbs();
+        downloadPdf(bytes, 'with_image');
+        document.getElementById('ai-status').textContent =
+          '✅ Image added to page ' + pageNum + ' and downloaded!';
+      } catch(e) { alert('Error adding image. Check page number and image file.'); console.error(e); }
+      hideLoad();
+    }
+
+    // ── Reset ──
+    function resetTool() {
+      pdfBytes = null; pdfJsDoc = null; totalPages = 0;
+      selectedPgs.clear(); mergeFiles = []; imgBytes = null;
+      document.getElementById('editor-section').style.display = 'none';
+      document.getElementById('upload-section').style.display = 'block';
+      document.getElementById('pdf-input').value = '';
+      document.getElementById('page-grid').innerHTML = '';
+      document.getElementById('ai-drop-text').textContent = 'Click to upload image (JPEG or PNG)';
+      document.getElementById('ai-btn').disabled = true;
+      document.getElementById('split-status').textContent = '';
+      document.getElementById('merge-status').textContent = '';
+      document.getElementById('ai-status').textContent = '';
+      setTab('organize');
+    }
+  </script>
+  <script>if("serviceWorker"in navigator)navigator.serviceWorker.register("/sw.js");</script>
+</body>
+</html>

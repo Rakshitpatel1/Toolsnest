@@ -1,4 +1,4 @@
-const CACHE = 'toolsnest-v2';
+const CACHE = 'toolsnest-v3';
 
 const PAGES = [
   '/',
@@ -14,6 +14,7 @@ const PAGES = [
   '/tools/citation-generator/',
   '/tools/assignment-formatter/',
   '/tools/unit-converter/',
+  '/tools/pdf-editor/',
   '/about/',
   '/privacy/',
 ];
