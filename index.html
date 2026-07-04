@@ -45,6 +45,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
   <link rel="stylesheet" href="/css/shared.css" />
+  <!-- Google AdSense: once approved, uncomment and replace ca-pub-XXXXXXXXXXXXXXXX with your publisher ID -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SLJFPZQKMQ"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-SLJFPZQKMQ');</script>
 </head>
@@ -69,6 +71,7 @@
   </nav>
   <div class="mobile-menu" id="mobile-menu">
     <a href="/">🏠 Home</a>
+    <a href="/tools/video-converter/">🎬 Video Converter</a>
     <a href="/tools/case-converter/">Tt Case Converter</a>
     <a href="/tools/word-counter/">№ Word Counter</a>
     <a href="/tools/password-generator/">🔒 Password Generator</a>
@@ -92,7 +95,7 @@
         <button aria-label="Search"><i class="ti ti-search"></i></button>
       </div>
       <div class="hero-stats">
-        <div class="stat"><div class="stat-num">13</div><div class="stat-label">Free Tools</div></div>
+        <div class="stat"><div class="stat-num">14</div><div class="stat-label">Free Tools</div></div>
         <div class="stat-divider"></div>
         <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Browser-based</div></div>
         <div class="stat-divider"></div>
@@ -106,6 +109,7 @@
         <div class="cat-tab" onclick="filterCat('text',this)"><i class="ti ti-text-size"></i> Text</div>
         <div class="cat-tab" onclick="filterCat('image',this)"><i class="ti ti-photo"></i> Image</div>
         <div class="cat-tab" onclick="filterCat('student',this)"><i class="ti ti-school"></i> Student</div>
+        <div class="cat-tab" onclick="filterCat('media',this)"><i class="ti ti-video"></i> Media</div>
       </div>
     </div>
 
@@ -113,9 +117,17 @@
       <div class="section-header">
         <div class="section-title">All tools</div>
         <div class="section-line"></div>
-        <div class="section-count" id="tool-count">13 tools</div>
+        <div class="section-count" id="tool-count">14 tools</div>
       </div>
       <div class="tools-grid" id="tools-grid">
+
+        <a class="tool-card" href="/tools/video-converter/" data-cat="media" data-name="video converter audio converter mp4 webm mp3 wav trim compress extract audio">
+          <div class="badge badge-new">New</div>
+          <div class="tool-icon" style="background:#F5F3FF;color:#7C3AED;"><i class="ti ti-video"></i></div>
+          <h3>Video &amp; Audio Converter</h3>
+          <p>Convert, trim, compress or extract audio from video/audio files. 100% private.</p>
+          <span class="tool-tag tag-image">Media</span>
+        </a>
 
         <a class="tool-card" href="/tools/compress-image/" data-cat="image" data-name="compress image reduce file size jpeg png photo">
           <div class="badge badge-popular">Popular</div>
@@ -222,6 +234,18 @@
       <div id="no-results"><i class="ti ti-search-off"></i>No tools found. Try a different keyword.</div>
     </div>
 
+    <div class="ad-slot">
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-box">
+        <!--
+          Paste your AdSense unit here once approved, e.g.:
+          <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+               data-ad-slot="XXXXXXXXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        -->
+      </div>
+    </div>
+
   </main>
 
   <footer>
@@ -236,6 +260,7 @@
         </div>
         <div class="footer-links-col">
           <h4>Tools</h4>
+          <a href="/tools/video-converter/">Video Converter</a>
           <a href="/tools/compress-image/">Compress Image</a>
           <a href="/tools/passport-photo/">Passport Photo</a>
           <a href="/tools/image-to-pdf/">Image to PDF</a>

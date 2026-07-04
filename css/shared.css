@@ -240,6 +240,16 @@ footer { background: var(--surface); border-top: 1px solid var(--border); paddin
 .prose ul { padding-left: 20px; }
 .prose ul li { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 4px; }
 
+/* ── AD SLOT ── */
+.ad-slot { width: 100%; max-width: 728px; margin: 28px auto; text-align: center; }
+.ad-slot .ad-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.ad-slot .ad-box { width: 100%; min-height: 100px; display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px dashed var(--border-strong); border-radius: var(--radius-sm); overflow: hidden; }
+.ad-slot ins.adsbygoogle { display: block; width: 100%; }
+@media (max-width: 700px) {
+  .ad-slot { margin: 20px auto; }
+  .ad-slot .ad-box { min-height: 90px; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
   nav { padding: 0 1.25rem; }
