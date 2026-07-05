@@ -1,0 +1,3 @@
+# Permanently redirect the old Netlify subdomain to the custom domain,
+# so search engines and old links move over to toolsnestindia.com.
+https://toolsnestindia.netlify.app/*  https://toolsnestindia.com/:splat  301!
